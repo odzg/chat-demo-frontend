@@ -1,0 +1,60 @@
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from 'react-router-dom';
+
+import { App } from './app';
+import { AuthGuard } from './features/auth/components/auth-guard';
+import './index.css';
+import { IndexPage } from './pages/index';
+import { SignInPage } from './pages/sign-in';
+import { ThreadPage } from './pages/thread';
+import { store } from './store';
+
+const router = createBrowserRouter([
+  {
+    children: [
+      {
+        element: (
+          <AuthGuard>
+            <IndexPage />
+          </AuthGuard>
+        ),
+        index: true,
+      },
+      {
+        element: (
+          <AuthGuard>
+            <ThreadPage />
+          </AuthGuard>
+        ),
+        path: '/threads/:threadId',
+      },
+      {
+        element: <SignInPage />,
+        path: '/sign-in',
+      },
+      {
+        element: <Navigate to="/" />,
+        path: '*',
+      },
+    ],
+    element: <App />,
+  },
+]);
+
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+  createRoot(rootElement).render(
+    <StrictMode>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </StrictMode>,
+  );
+}
