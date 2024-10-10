@@ -12,6 +12,7 @@ export type GetThreadsQueryArg = RtkqVoidQueryArg;
 export type GetThreadsQueryResult = SimplifyDeep<
   Array<
     {
+      lastMessage: null | ThreadMessage;
       threadUsers: Array<
         {
           user: User;
@@ -24,7 +25,7 @@ export type GetThreadsQueryResult = SimplifyDeep<
 export type GetThreadQueryArg = {
   threadId: number;
 };
-export type GetThreadQueryResult = Array<Thread>;
+export type GetThreadQueryResult = Thread;
 
 export type GetThreadUsersQueryArg = {
   threadId: number;
@@ -41,3 +42,9 @@ export type GetThreadMessagesQueryArg = {
   threadId: number;
 };
 export type GetThreadMessagesQueryResult = Array<ThreadMessage>;
+
+export type CreateThreadMessageQueryArg = {
+  threadId: number;
+  threadMessage: Pick<ThreadMessage, 'content' | 'userId'>;
+};
+export type CreateThreadMessageQueryResult = ThreadMessage;

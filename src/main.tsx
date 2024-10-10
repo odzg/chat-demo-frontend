@@ -1,3 +1,4 @@
+import { StyledEngineProvider, ThemeProvider } from '@mui/material';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -14,6 +15,7 @@ import { IndexPage } from './pages/index';
 import { SignInPage } from './pages/sign-in';
 import { ThreadPage } from './pages/thread';
 import { store } from './store';
+import { theme } from './theme';
 
 const router = createBrowserRouter([
   {
@@ -53,7 +55,11 @@ if (rootElement) {
   createRoot(rootElement).render(
     <StrictMode>
       <Provider store={store}>
-        <RouterProvider router={router} />
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <RouterProvider router={router} />
+          </ThemeProvider>
+        </StyledEngineProvider>
       </Provider>
     </StrictMode>,
   );
