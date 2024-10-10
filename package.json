@@ -40,7 +40,7 @@
     "eslint-plugin-security": "3.0.1",
     "eslint-plugin-yml": "1.14.0",
     "eslint-typegen": "0.3.2",
-    "knip": "5.33.2",
+    "knip": "5.33.3",
     "postcss": "8.4.47",
     "postcss-load-config": "6.0.1",
     "prettier": "3.3.3",
