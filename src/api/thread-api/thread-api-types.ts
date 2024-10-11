@@ -1,4 +1,4 @@
-import type { SimplifyDeep } from 'type-fest';
+import type { Except, SimplifyDeep } from 'type-fest';
 
 import type {
   Thread,
@@ -9,7 +9,7 @@ import type { User } from '@/schemas/user-schemas';
 import type { RtkqVoidQueryArg } from '@/types/utility-types';
 
 export type GetThreadsQueryArg = RtkqVoidQueryArg;
-export type GetThreadsQueryResult = SimplifyDeep<
+export type GetThreadsQueryRawResult = SimplifyDeep<
   Array<
     {
       lastMessage: null | ThreadMessage;
@@ -19,6 +19,13 @@ export type GetThreadsQueryResult = SimplifyDeep<
         } & ThreadUser
       >;
     } & Thread
+  >
+>;
+export type GetThreadsQueryTransformedResult = SimplifyDeep<
+  Array<
+    {
+      lastMessages: Array<ThreadMessage>;
+    } & Except<GetThreadsQueryRawResult[number], 'lastMessage'>
   >
 >;
 

@@ -3,7 +3,7 @@ import type { SignInQueryArg, SignInQueryResult } from './auth-api-types';
 import { api } from '../api';
 import { apiToken } from '../api-token';
 
-const SIGN_IN_ROUTE = '/sign-in';
+const SIGN_IN_PATH = '/sign-in';
 
 export const authApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -16,7 +16,7 @@ export const authApi = api.injectEndpoints({
       query: (args) => ({
         body: args,
         method: 'POST',
-        url: SIGN_IN_ROUTE,
+        url: SIGN_IN_PATH,
       }),
     }),
   }),

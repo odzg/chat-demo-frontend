@@ -2,13 +2,13 @@ import type { GetMyUserQueryArg, GetMyUserQueryResult } from './user-api-types';
 
 import { api } from '../api';
 
-const USERS_ROUTE = '/users';
-const MY_USER_ROUTE = `${USERS_ROUTE}/me`;
+const USERS_PATH = '/users';
+const MY_USER_PATH = `${USERS_PATH}/me`;
 
 export const userApi = api.injectEndpoints({
   endpoints: (build) => ({
     getMyUser: build.query<GetMyUserQueryResult, GetMyUserQueryArg>({
-      query: () => MY_USER_ROUTE,
+      query: () => MY_USER_PATH,
     }),
   }),
 });

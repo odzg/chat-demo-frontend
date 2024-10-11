@@ -34,7 +34,7 @@ export const ThreadPage: FC = () => {
   );
 
   return isValidThreadId ? (
-    <div className="flex flex-1 flex-col items-center justify-center gap-8 pb-8">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-8 pb-8">
       <AppBar className="bg-purple-200" elevation={0} position="static">
         <Toolbar className="gap-7">
           <IconButton component={Link} to="/">

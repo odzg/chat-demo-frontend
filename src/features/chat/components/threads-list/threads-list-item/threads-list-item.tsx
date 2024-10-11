@@ -22,11 +22,10 @@ export const ThreadsListItem: FC<ThreadsListItemProps> = ({ threadId }) => {
     }),
   });
 
+  const lastMessage = thread?.lastMessages.at(-1);
   const lastMessageUser =
-    thread?.lastMessage &&
-    thread.threadUsers.find(
-      ({ userId }) => userId === thread.lastMessage?.userId,
-    );
+    lastMessage &&
+    thread?.threadUsers.find(({ userId }) => userId === lastMessage.userId);
 
   const threadUser = thread?.threadUsers.find(
     ({ userId }) => userId !== myUserId,
@@ -51,23 +50,21 @@ export const ThreadsListItem: FC<ThreadsListItemProps> = ({ threadId }) => {
             <Avatar className="bg-purple-400 text-white">
               {threadUserNameInitials}
             </Avatar>
-            {thread.lastMessage && lastMessageUser && (
+            {lastMessage && lastMessageUser && (
               <div>
                 <Typography className="font-semibold text-purple-900">
                   {threadUser.user.firstName}&nbsp;
                   {threadUser.user.lastName}
                 </Typography>
                 <Typography className="text-purple-800">
-                  {thread.lastMessage.content}
+                  {lastMessage.content}
                 </Typography>
               </div>
             )}
           </div>
-          {thread.lastMessage && (
+          {lastMessage && (
             <Typography>
-              {capitalize(
-                formatDistanceToNow(new Date(thread.lastMessage.createdAt)),
-              )}
+              {capitalize(formatDistanceToNow(new Date(lastMessage.createdAt)))}
             </Typography>
           )}
         </ButtonBase>
