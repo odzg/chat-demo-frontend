@@ -13,14 +13,17 @@ import perfectionist from 'eslint-plugin-perfectionist';
 import pluginPromise from 'eslint-plugin-promise';
 import reactPlugin from 'eslint-plugin-react';
 // @ts-expect-error Currently does not include a type-declaration file
-import pluginSecurity from 'eslint-plugin-security';
-import eslintPluginYml from 'eslint-plugin-yml';
-import typegen from 'eslint-typegen';
-import tseslint from 'typescript-eslint';
+import reactCompiler from 'eslint-plugin-react-compiler';
 // @ts-expect-error Currently does not include a type-declaration file
 import reactHooks from 'eslint-plugin-react-hooks';
 // @ts-expect-error Currently does not include a type-declaration file
 import reactRefresh from 'eslint-plugin-react-refresh';
+// @ts-expect-error Currently does not include a type-declaration file
+import pluginSecurity from 'eslint-plugin-security';
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
+import eslintPluginYml from 'eslint-plugin-yml';
+import typegen from 'eslint-typegen';
+import tseslint from 'typescript-eslint';
 
 const JS_EXTENSIONS_GLOB = '**/*.{js,cjs}';
 const TS_EXTENSIONS_GLOB = '**/*.{ts,tsx}';
@@ -71,7 +74,7 @@ export default typegen([
         'error',
         { argsIgnorePattern: '^_' },
       ],
-      '@typescript-eslint/prefer-nullish-coalescing': 'off',
+      '@typescript-eslint/prefer-nullish-coalescing': 'off', // Too restrictive
     },
   },
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
@@ -91,8 +94,8 @@ export default typegen([
   ...eslintPluginYml.configs['flat/prettier'],
   eslintPluginImportX.flatConfigs.recommended,
   eslintPluginImportX.flatConfigs.typescript,
-  reactPlugin.configs.flat.recommended,
-  reactPlugin.configs.flat['jsx-runtime'],
+  reactPlugin.configs.flat?.recommended,
+  reactPlugin.configs.flat?.['jsx-runtime'],
   {
     files: [TS_EXTENSIONS_GLOB],
     ...jsdoc.configs['flat/recommended-typescript-error'],
@@ -101,8 +104,11 @@ export default typegen([
     files: [JS_EXTENSIONS_GLOB],
     ...jsdoc.configs['flat/recommended-typescript-flavor-error'],
   },
+  eslintPluginUnicorn.configs['flat/recommended'],
   {
     plugins: {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
+      'react-compiler': reactCompiler,
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
       'react-hooks': reactHooks,
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
@@ -135,7 +141,7 @@ export default typegen([
             'object',
             'unknown',
           ],
-          internalPattern: ['@/**'],
+          internalPattern: ['^@/'],
           newlinesBetween: 'always',
         },
       ],
@@ -144,6 +150,16 @@ export default typegen([
         { allowConstantExport: true },
       ],
       'security/detect-object-injection': 'off',
+      'unicorn/no-null': 'off', // Too restrictive
+      'unicorn/prevent-abbreviations': [
+        'error',
+        {
+          allowList: {
+            EnvSchema: true,
+          },
+          ignore: [/^env$/, /props$/i, /params$/i],
+        },
+      ],
     },
     settings: {
       react: {
@@ -154,13 +170,19 @@ export default typegen([
   {
     files: ['**/*.cjs'],
     rules: {
-      '@typescript-eslint/no-require-imports': 'off', // CommonJS files may only use "require()" to import modules
+      '@typescript-eslint/no-require-imports': 'off', // CommonJS files must use "require" to import modules
     },
   },
   {
     files: ['package.json'],
     rules: {
-      'jsonc/sort-keys': 'off', // Sorting of keys within `package.json` is enforced by `syncpack`
+      'jsonc/sort-keys': 'off', // Sorting of keys within `package.json` is handled by `syncpack`
+    },
+  },
+  {
+    files: ['src/store.ts'],
+    rules: {
+      'unicorn/prefer-spread': 'off',
     },
   },
   eslintConfigPrettier,

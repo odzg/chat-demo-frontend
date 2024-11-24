@@ -3,16 +3,16 @@ import { CreateThreadMessageSchema } from '@/schemas/event-schemas';
 import { parseJson } from '@/utils/parse-json-string';
 
 import type {
-  CreateThreadMessageQueryArg,
+  CreateThreadMessageQueryArgument,
   CreateThreadMessageQueryResult,
-  GetThreadMessagesQueryArg,
+  GetThreadMessagesQueryArgument,
   GetThreadMessagesQueryResult,
-  GetThreadQueryArg,
+  GetThreadQueryArgument,
   GetThreadQueryResult,
-  GetThreadsQueryArg,
+  GetThreadsQueryArgument,
   GetThreadsQueryRawResult,
   GetThreadsQueryTransformedResult,
-  GetThreadUsersQueryArg,
+  GetThreadUsersQueryArgument,
   GetThreadUsersQueryResult,
 } from './thread-api-types';
 
@@ -31,7 +31,7 @@ export const threadApi = api.injectEndpoints({
   endpoints: (build) => ({
     createThreadMessage: build.mutation<
       CreateThreadMessageQueryResult,
-      CreateThreadMessageQueryArg
+      CreateThreadMessageQueryArgument
     >({
       query: ({ threadId, threadMessage }) => ({
         body: threadMessage,
@@ -39,12 +39,12 @@ export const threadApi = api.injectEndpoints({
         url: getThreadMessagesRoute(threadId),
       }),
     }),
-    getThread: build.query<GetThreadQueryResult, GetThreadQueryArg>({
+    getThread: build.query<GetThreadQueryResult, GetThreadQueryArgument>({
       query: ({ threadId }) => getThreadRoute(threadId),
     }),
     getThreadMessages: build.query<
       GetThreadMessagesQueryResult,
-      GetThreadMessagesQueryArg
+      GetThreadMessagesQueryArgument
     >({
       async onCacheEntryAdded({ threadId }, api) {
         const ws = new WebSocket(`${env.VITE_API_BASE_URL}/websocket`);
@@ -86,9 +86,9 @@ export const threadApi = api.injectEndpoints({
     }),
     getThreads: build.query<
       GetThreadsQueryTransformedResult,
-      GetThreadsQueryArg
+      GetThreadsQueryArgument
     >({
-      async onCacheEntryAdded(_arg, api) {
+      async onCacheEntryAdded(_argument, api) {
         const ws = new WebSocket(`${env.VITE_API_BASE_URL}/websocket`);
 
         try {
@@ -138,7 +138,7 @@ export const threadApi = api.injectEndpoints({
     }),
     getThreadUsers: build.query<
       GetThreadUsersQueryResult,
-      GetThreadUsersQueryArg
+      GetThreadUsersQueryArgument
     >({
       query: ({ threadId }) => getThreadUsersRoute(threadId),
     }),

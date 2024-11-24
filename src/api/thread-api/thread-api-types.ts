@@ -6,52 +6,52 @@ import type {
   ThreadUser,
 } from '@/schemas/thread-schemas';
 import type { User } from '@/schemas/user-schemas';
-import type { RtkqVoidQueryArg } from '@/types/utility-types';
+import type { RtkqVoidQueryArgument } from '@/types/utility-types';
 
-export type GetThreadsQueryArg = RtkqVoidQueryArg;
-export type GetThreadsQueryRawResult = SimplifyDeep<
-  Array<
-    {
-      lastMessage: null | ThreadMessage;
-      threadUsers: Array<
-        {
-          user: User;
-        } & ThreadUser
-      >;
-    } & Thread
-  >
->;
-export type GetThreadsQueryTransformedResult = SimplifyDeep<
-  Array<
-    {
-      lastMessages: Array<ThreadMessage>;
-    } & Except<GetThreadsQueryRawResult[number], 'lastMessage'>
-  >
->;
-
-export type GetThreadQueryArg = {
-  threadId: number;
-};
-export type GetThreadQueryResult = Thread;
-
-export type GetThreadUsersQueryArg = {
-  threadId: number;
-};
-export type GetThreadUsersQueryResult = SimplifyDeep<
-  Array<
-    {
-      user: User;
-    } & ThreadUser
-  >
->;
-
-export type GetThreadMessagesQueryArg = {
-  threadId: number;
-};
-export type GetThreadMessagesQueryResult = Array<ThreadMessage>;
-
-export type CreateThreadMessageQueryArg = {
+export type CreateThreadMessageQueryArgument = {
   threadId: number;
   threadMessage: Pick<ThreadMessage, 'content' | 'userId'>;
 };
 export type CreateThreadMessageQueryResult = ThreadMessage;
+export type GetThreadMessagesQueryArgument = {
+  threadId: number;
+};
+
+export type GetThreadMessagesQueryResult = Array<ThreadMessage>;
+export type GetThreadQueryArgument = {
+  threadId: number;
+};
+
+export type GetThreadQueryResult = Thread;
+export type GetThreadsQueryArgument = RtkqVoidQueryArgument;
+
+export type GetThreadsQueryRawResult = SimplifyDeep<
+  Array<
+    Thread & {
+      lastMessage: null | ThreadMessage;
+      threadUsers: Array<
+        ThreadUser & {
+          user: User;
+        }
+      >;
+    }
+  >
+>;
+export type GetThreadsQueryTransformedResult = SimplifyDeep<
+  Array<
+    Except<GetThreadsQueryRawResult[number], 'lastMessage'> & {
+      lastMessages: Array<ThreadMessage>;
+    }
+  >
+>;
+
+export type GetThreadUsersQueryArgument = {
+  threadId: number;
+};
+export type GetThreadUsersQueryResult = SimplifyDeep<
+  Array<
+    ThreadUser & {
+      user: User;
+    }
+  >
+>;
