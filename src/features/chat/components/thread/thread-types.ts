@@ -1,3 +1,3 @@
-export type ThreadProps = {
+export interface ThreadProps {
   threadId: number;
-};
+}

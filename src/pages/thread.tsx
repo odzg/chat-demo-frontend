@@ -8,9 +8,7 @@ import { useGetThreadUsersQuery } from '@/api/thread-api';
 import { useGetMyUserQuery } from '@/api/user-api';
 import { Thread } from '@/features/chat/components/thread';
 
-type ThreadPageUrlParams = {
-  threadId: string;
-};
+type ThreadPageUrlParams = Record<'threadId', string>;
 
 export const ThreadPage: FC = () => {
   const { threadId } = useParams<ThreadPageUrlParams>();

@@ -8,19 +8,19 @@ import type {
 import type { User } from '@/schemas/user-schemas';
 import type { RtkqVoidQueryArgument } from '@/types/utility-types';
 
-export type CreateThreadMessageQueryArgument = {
+export interface CreateThreadMessageQueryArgument {
   threadId: number;
   threadMessage: Pick<ThreadMessage, 'content' | 'userId'>;
-};
+}
 export type CreateThreadMessageQueryResult = ThreadMessage;
-export type GetThreadMessagesQueryArgument = {
+export interface GetThreadMessagesQueryArgument {
   threadId: number;
-};
+}
 
 export type GetThreadMessagesQueryResult = Array<ThreadMessage>;
-export type GetThreadQueryArgument = {
+export interface GetThreadQueryArgument {
   threadId: number;
-};
+}
 
 export type GetThreadQueryResult = Thread;
 export type GetThreadsQueryArgument = RtkqVoidQueryArgument;
@@ -45,9 +45,9 @@ export type GetThreadsQueryTransformedResult = SimplifyDeep<
   >
 >;
 
-export type GetThreadUsersQueryArgument = {
+export interface GetThreadUsersQueryArgument {
   threadId: number;
-};
+}
 export type GetThreadUsersQueryResult = SimplifyDeep<
   Array<
     ThreadUser & {

@@ -1,4 +1,4 @@
-export type MessageBubbleProps = {
+export interface MessageBubbleProps {
   threadId: number;
   threadMessageId: number;
-};
+}
