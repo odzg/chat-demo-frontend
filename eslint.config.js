@@ -17,6 +17,7 @@ import reactCompiler from 'eslint-plugin-react-compiler';
 // @ts-expect-error Currently does not include a type-declaration file
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import regexpPlugin from 'eslint-plugin-regexp';
 // @ts-expect-error Currently does not include a type-declaration file
 import pluginSecurity from 'eslint-plugin-security';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
@@ -104,6 +105,7 @@ export default typegen([
     ...jsdoc.configs['flat/recommended-typescript-flavor-error'],
   },
   eslintPluginUnicorn.configs['flat/recommended'],
+  regexpPlugin.configs['flat/recommended'],
   {
     plugins: {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
