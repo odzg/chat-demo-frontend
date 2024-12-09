@@ -16,7 +16,6 @@ import reactPlugin from 'eslint-plugin-react';
 import reactCompiler from 'eslint-plugin-react-compiler';
 // @ts-expect-error Currently does not include a type-declaration file
 import reactHooks from 'eslint-plugin-react-hooks';
-// @ts-expect-error Currently does not include a type-declaration file
 import reactRefresh from 'eslint-plugin-react-refresh';
 // @ts-expect-error Currently does not include a type-declaration file
 import pluginSecurity from 'eslint-plugin-security';
@@ -95,6 +94,7 @@ export default typegen([
   eslintPluginImportX.flatConfigs.typescript,
   reactPlugin.configs.flat?.recommended,
   reactPlugin.configs.flat?.['jsx-runtime'],
+  reactRefresh.configs.vite,
   {
     files: [TS_EXTENSIONS_GLOB],
     ...jsdoc.configs['flat/recommended-typescript-error'],
@@ -110,8 +110,6 @@ export default typegen([
       'react-compiler': reactCompiler,
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
       'react-hooks': reactHooks,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
-      'react-refresh': reactRefresh,
     },
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration for `eslint-plugin-react-hooks`
     rules: {
@@ -143,10 +141,6 @@ export default typegen([
           internalPattern: ['^@/'],
           newlinesBetween: 'always',
         },
-      ],
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
       ],
       'security/detect-object-injection': 'off',
       'unicorn/no-null': 'off', // Too restrictive

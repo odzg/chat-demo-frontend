@@ -1,7 +1,7 @@
 import SendIcon from '@mui/icons-material/Send';
 import { IconButton, TextField } from '@mui/material';
 import { type FC, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 
 import { useCreateThreadMessageMutation } from '@/api/thread-api';
 import { useGetMyUserQuery } from '@/api/user-api';

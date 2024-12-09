@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router';
 
 import { useGetThreadUsersQuery } from '@/api/thread-api';
 import { useGetMyUserQuery } from '@/api/user-api';

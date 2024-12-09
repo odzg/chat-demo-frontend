@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from 'react';
 
 import { CircularProgress } from '@mui/material';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 
 import { useGetMyUserQuery } from '@/api/user-api';
 

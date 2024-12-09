@@ -2,11 +2,7 @@ import { StyledEngineProvider, ThemeProvider } from '@mui/material';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 
 import { App } from './app';
 import { AuthGuard } from './features/auth/components/auth-guard';

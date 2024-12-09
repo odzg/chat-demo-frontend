@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import { Avatar, ButtonBase, Typography } from '@mui/material';
 import { formatDistanceToNow } from 'date-fns';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { capitalize } from 'remeda';
 
 import { useGetThreadsQuery } from '@/api/thread-api';
