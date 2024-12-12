@@ -1,5 +1,6 @@
 // @ts-expect-error Currently does not include a type-declaration file
 import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
+import react from '@eslint-react/eslint-plugin';
 import eslint from '@eslint/js';
 import markdown from '@eslint/markdown';
 // @ts-expect-error Currently does not include a type-declaration file
@@ -58,6 +59,10 @@ export default typegen([
       },
     },
   }),
+  {
+    files: JS_TS_EXTENSION_GLOBS,
+    ...react.configs['recommended-type-checked'],
+  },
   {
     files: JS_TS_EXTENSION_GLOBS,
     rules: {
