@@ -8,6 +8,7 @@ import eslintPluginImportX from 'eslint-plugin-import-x';
 import jsdoc from 'eslint-plugin-jsdoc';
 import eslintPluginJsonSchemaValidator from 'eslint-plugin-json-schema-validator';
 import eslintPluginJsonc from 'eslint-plugin-jsonc';
+import nodePlugin from 'eslint-plugin-n';
 import perfectionist from 'eslint-plugin-perfectionist';
 // @ts-expect-error Currently does not include a type-declaration file
 import pluginPromise from 'eslint-plugin-promise';
@@ -91,6 +92,7 @@ export default typegen([
   perfectionist.configs['recommended-natural'],
   ...eslintPluginYml.configs['flat/recommended'],
   ...eslintPluginYml.configs['flat/prettier'],
+  nodePlugin.configs['flat/recommended-script'],
   eslintPluginImportX.flatConfigs.recommended,
   eslintPluginImportX.flatConfigs.typescript,
   reactPlugin.configs.flat?.recommended,
@@ -125,6 +127,13 @@ export default typegen([
       'import-x/no-named-as-default-member': 'off', // TypeScript already enforces this
       'import-x/no-unresolved': ['error', { commonjs: true }],
       'jsonc/sort-keys': 'error',
+      'n/no-missing-import': 'off', // This is already enforced either by TypeScript or by `import-x/no-unresolved`
+      'n/no-unpublished-import': [
+        'error',
+        {
+          ignoreTypeImport: true,
+        },
+      ],
       'no-console': ['error', { allow: ['error'] }],
       'perfectionist/sort-imports': [
         'error',
@@ -144,7 +153,7 @@ export default typegen([
           newlinesBetween: 'always',
         },
       ],
-      'security/detect-object-injection': 'off',
+      'security/detect-object-injection': 'off', // Too restrictive
       'unicorn/no-null': 'off', // Too restrictive
       'unicorn/prevent-abbreviations': [
         'error',
