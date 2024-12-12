@@ -25,7 +25,7 @@
     "@types/react-dom": "18.3.2",
     "@vitejs/plugin-react-swc": "3.7.2",
     "autoprefixer": "10.4.20",
-    "dependency-cruiser": "16.7.0",
+    "dependency-cruiser": "16.8.0",
     "eslint": "9.16.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-typescript": "3.7.0",
