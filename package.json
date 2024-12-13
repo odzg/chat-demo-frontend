@@ -45,7 +45,7 @@
     "eslint-plugin-unicorn": "56.0.1",
     "eslint-plugin-yml": "1.16.0",
     "eslint-typegen": "0.3.2",
-    "knip": "5.39.4",
+    "knip": "5.40.0",
     "postcss": "8.4.49",
     "postcss-load-config": "6.0.1",
     "prettier": "3.4.2",
