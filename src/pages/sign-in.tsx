@@ -26,6 +26,7 @@ export const SignInPage: FC = () => {
           void (async () => {
             await signIn({
               email: 'user1@example.com',
+              // eslint-disable-next-line sonarjs/no-hardcoded-passwords
               password: 'password123',
             });
 
@@ -40,6 +41,7 @@ export const SignInPage: FC = () => {
           void (async () => {
             await signIn({
               email: 'user2@example.com',
+              // eslint-disable-next-line sonarjs/no-hardcoded-passwords
               password: 'password456',
             });
 

@@ -6,7 +6,6 @@ import type {
   ThreadUser,
 } from '@/schemas/thread-schemas';
 import type { User } from '@/schemas/user-schemas';
-import type { RtkqVoidQueryArgument } from '@/types/utility-types';
 
 export interface CreateThreadMessageQueryArgument {
   threadId: number;
@@ -23,7 +22,6 @@ export interface GetThreadQueryArgument {
 }
 
 export interface GetThreadQueryResult extends Thread {}
-export type GetThreadsQueryArgument = RtkqVoidQueryArgument;
 
 export type GetThreadsQueryRawResult = SimplifyDeep<
   Array<

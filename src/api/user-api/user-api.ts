@@ -1,7 +1,4 @@
-import type {
-  GetMyUserQueryArgument,
-  GetMyUserQueryResult,
-} from './user-api-types';
+import type { GetMyUserQueryResult } from './user-api-types';
 
 import { api } from '../api';
 
@@ -10,7 +7,8 @@ const MY_USER_PATH = `${USERS_PATH}/me`;
 
 export const userApi = api.injectEndpoints({
   endpoints: (build) => ({
-    getMyUser: build.query<GetMyUserQueryResult, GetMyUserQueryArgument>({
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+    getMyUser: build.query<GetMyUserQueryResult, void>({
       query: () => MY_USER_PATH,
     }),
   }),

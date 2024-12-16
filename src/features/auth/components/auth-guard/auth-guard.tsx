@@ -21,5 +21,5 @@ export const AuthGuard: FC<PropsWithChildren> = ({ children }) => {
     return <Navigate to="/sign-in" />;
   }
 
-  return children;
+  return <>{children}</>;
 };

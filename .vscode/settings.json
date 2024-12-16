@@ -10,10 +10,11 @@
   "eslint.codeActionsOnSave.rules": [
     "@typescript-eslint/consistent-type-imports",
     "@typescript-eslint/no-import-type-side-effects",
-    "perfectionist/*",
     "import-x/no-duplicates",
     "import-x/first",
-    "jsonc/sort-keys"
+    "jsonc/sort-keys",
+    "package-json/*",
+    "perfectionist/*"
   ],
   "eslint.rules.customizations": [
     {

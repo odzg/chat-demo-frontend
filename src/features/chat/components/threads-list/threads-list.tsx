@@ -8,7 +8,7 @@ export const ThreadsList: FC = () => {
   const { data: threads, isLoading } = useGetThreadsQuery();
 
   if (isLoading) {
-    return 'Loading...';
+    return <>Loading...</>;
   }
 
   return threads?.length ? (

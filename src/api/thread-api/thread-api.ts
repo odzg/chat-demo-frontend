@@ -9,7 +9,6 @@ import type {
   GetThreadMessagesQueryResult,
   GetThreadQueryArgument,
   GetThreadQueryResult,
-  GetThreadsQueryArgument,
   GetThreadsQueryRawResult,
   GetThreadsQueryTransformedResult,
   GetThreadUsersQueryArgument,
@@ -63,6 +62,7 @@ export const threadApi = api.injectEndpoints({
               if (data && isSameThread) {
                 api.updateCachedData((draft) => {
                   const isMessageAlreadyCached = draft.some(
+                    // eslint-disable-next-line sonarjs/no-nested-functions -- Should refactor
                     ({ id }) => id === data.payload.id,
                   );
 
@@ -84,10 +84,8 @@ export const threadApi = api.injectEndpoints({
       },
       query: ({ threadId }) => getThreadMessagesRoute(threadId),
     }),
-    getThreads: build.query<
-      GetThreadsQueryTransformedResult,
-      GetThreadsQueryArgument
-    >({
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+    getThreads: build.query<GetThreadsQueryTransformedResult, void>({
       async onCacheEntryAdded(_argument, api) {
         const ws = new WebSocket(`${env.VITE_API_BASE_URL}/websocket`);
 
@@ -104,10 +102,12 @@ export const threadApi = api.injectEndpoints({
               if (data) {
                 api.updateCachedData((draft) => {
                   const associatedThread = draft.find(
+                    // eslint-disable-next-line sonarjs/no-nested-functions -- Should refactor
                     ({ id }) => id === data.payload.threadId,
                   );
                   const isMessageAlreadyCached =
                     !!associatedThread?.lastMessages.some(
+                      // eslint-disable-next-line sonarjs/no-nested-functions -- Should refactor
                       ({ id }) => id === data.payload.id,
                     );
 
