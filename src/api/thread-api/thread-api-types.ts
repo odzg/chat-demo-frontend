@@ -12,7 +12,7 @@ export interface CreateThreadMessageQueryArgument {
   threadId: number;
   threadMessage: Pick<ThreadMessage, 'content' | 'userId'>;
 }
-export type CreateThreadMessageQueryResult = ThreadMessage;
+export interface CreateThreadMessageQueryResult extends ThreadMessage {}
 export interface GetThreadMessagesQueryArgument {
   threadId: number;
 }
@@ -22,7 +22,7 @@ export interface GetThreadQueryArgument {
   threadId: number;
 }
 
-export type GetThreadQueryResult = Thread;
+export interface GetThreadQueryResult extends Thread {}
 export type GetThreadsQueryArgument = RtkqVoidQueryArgument;
 
 export type GetThreadsQueryRawResult = SimplifyDeep<

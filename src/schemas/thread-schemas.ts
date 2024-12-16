@@ -9,7 +9,8 @@ export const ThreadMessage = z.object({
   updatedAt: z.string().datetime(),
   userId: z.number(),
 });
-export type ThreadMessage = z.infer<typeof ThreadMessage>;
+
+export interface ThreadMessage extends z.infer<typeof ThreadMessage> {}
 
 export const Thread = z.object({
   createdAt: z.string().datetime(),
@@ -17,7 +18,8 @@ export const Thread = z.object({
   id: z.number(),
   updatedAt: z.string().datetime(),
 });
-export type Thread = z.infer<typeof Thread>;
+
+export interface Thread extends z.infer<typeof Thread> {}
 
 export const ThreadUser = z.object({
   createdAt: z.string().datetime(),
@@ -28,4 +30,5 @@ export const ThreadUser = z.object({
   userId: z.number(),
   viewedThreadLastAt: z.string().datetime(),
 });
-export type ThreadUser = z.infer<typeof ThreadUser>;
+
+export interface ThreadUser extends z.infer<typeof ThreadUser> {}
