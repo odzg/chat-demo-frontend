@@ -111,8 +111,8 @@ export default typegen([
   nodePlugin.configs['flat/recommended-script'],
   eslintPluginImportX.flatConfigs.recommended,
   eslintPluginImportX.flatConfigs.typescript,
-  reactPlugin.configs.flat?.recommended,
-  reactPlugin.configs.flat?.['jsx-runtime'],
+  reactPlugin.configs.flat.recommended,
+  reactPlugin.configs.flat['jsx-runtime'],
   reactRefresh.configs.vite,
   {
     files: [TS_EXTENSIONS_GLOB],

@@ -1,10 +1,14 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "entry": [
-    ".dependency-cruiser.js", // ".dependency-cruiser.js" is the config file for `dependency-cruiser`
-    "src/main.tsx" // Main entry point of Vite
+    // ".dependency-cruiser.js" is the config file for `dependency-cruiser`
+    ".dependency-cruiser.js"
   ],
   "ignoreDependencies": [
-    "eslint-import-resolver-typescript" // Used implicitly by `eslint-plugin-import-x`
-  ]
+    // Used implicitly by `eslint-plugin-import-x`
+    "eslint-import-resolver-typescript"
+  ],
+  "vite": {
+    "entry": "src/main.tsx"
+  }
 }
