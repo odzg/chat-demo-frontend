@@ -171,6 +171,7 @@ export default typegen([
           newlinesBetween: 'always',
         },
       ],
+      'react-compiler/react-compiler': 'error',
       'security/detect-object-injection': 'off', // Too restrictive
       'unicorn/no-null': 'off', // Too restrictive
       'unicorn/prevent-abbreviations': [
