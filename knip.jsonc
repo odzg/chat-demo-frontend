@@ -6,7 +6,10 @@
   ],
   "ignoreDependencies": [
     // Used implicitly by `eslint-plugin-import-x`
-    "eslint-import-resolver-typescript"
+    "eslint-import-resolver-typescript",
+
+    // Imported by main CSS file
+    "tailwindcss"
   ],
   "vite": {
     "entry": "src/main.tsx"
