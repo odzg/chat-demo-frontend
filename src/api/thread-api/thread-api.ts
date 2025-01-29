@@ -84,7 +84,7 @@ export const threadApi = api.injectEndpoints({
       },
       query: ({ threadId }) => getThreadMessagesRoute(threadId),
     }),
-    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type -- `void` is required so that the query would not require arguments
     getThreads: build.query<GetThreadsQueryTransformedResult, void>({
       async onCacheEntryAdded(_argument, api) {
         const ws = new WebSocket(`${env.VITE_API_BASE_URL}/websocket`);

@@ -135,6 +135,7 @@ export default typegen([
     rules: {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
       ...reactHooks.configs.recommended.rules,
+      '@eslint-community/eslint-comments/require-description': 'error',
       'import-x/default': 'off', // TypeScript already enforces this
       'import-x/named': 'off', // TypeScript already enforces this
       'import-x/namespace': 'off', // TypeScript already enforces this
@@ -207,4 +208,9 @@ export default typegen([
     },
   },
   eslintConfigPrettier,
+  {
+    linterOptions: {
+      reportUnusedInlineConfigs: 'error',
+    },
+  },
 ]);
