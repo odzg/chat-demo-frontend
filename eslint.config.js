@@ -3,6 +3,7 @@ import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import react from '@eslint-react/eslint-plugin';
 import eslint from '@eslint/js';
 import markdown from '@eslint/markdown';
+import gitignore from 'eslint-config-flat-gitignore';
 // @ts-expect-error Currently does not include a type-declaration file
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginImportX from 'eslint-plugin-import-x';
@@ -37,16 +38,15 @@ const JS_TS_EXTENSION_GLOBS = /** @type {const} **/ ([
 ]);
 
 export default typegen([
+  gitignore(),
   {
     ignores: [
+      /* Auto-generated files/directories */
+      'pnpm-lock.yaml',
+
       /* Specific dot-files/dot-directories which should not be auto-ignored */
       '!.dependency-cruiser.js',
       '!.vscode',
-
-      /* Auto-generated files/directories */
-      'dist',
-      'eslint-typegen.d.ts',
-      'pnpm-lock.yaml',
     ],
   },
   eslint.configs.recommended,
