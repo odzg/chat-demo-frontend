@@ -30,12 +30,8 @@ import eslintPluginYml from 'eslint-plugin-yml';
 import typegen from 'eslint-typegen';
 import tseslint from 'typescript-eslint';
 
-const JS_EXTENSIONS_GLOB = '**/*.{js,cjs}';
-const TS_EXTENSIONS_GLOB = '**/*.{ts,tsx}';
-const JS_TS_EXTENSION_GLOBS = /** @type {const} **/ ([
-  JS_EXTENSIONS_GLOB,
-  TS_EXTENSIONS_GLOB,
-]);
+const GLOB_JS = '**/*.?([cm])js';
+const GLOB_TS = '**/*.?([cm])ts';
 
 export default typegen([
   gitignore(),
@@ -56,7 +52,7 @@ export default typegen([
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
     ],
-    files: [...JS_TS_EXTENSION_GLOBS],
+    files: [GLOB_JS, GLOB_TS],
     languageOptions: {
       parserOptions: {
         projectService: true,
@@ -65,12 +61,10 @@ export default typegen([
     },
   }),
   {
-    files: JS_TS_EXTENSION_GLOBS,
+    files: [GLOB_JS, GLOB_TS],
     ...react.configs['recommended-type-checked'],
-  },
-  {
-    files: JS_TS_EXTENSION_GLOBS,
     rules: {
+      ...react.configs['recommended-type-checked'].rules,
       '@typescript-eslint/array-type': ['error', { default: 'generic' }],
       '@typescript-eslint/consistent-generic-constructors': 'error',
       '@typescript-eslint/consistent-indexed-object-style': 'error',
@@ -113,11 +107,11 @@ export default typegen([
   reactPlugin.configs.flat['jsx-runtime'],
   reactRefresh.configs.vite,
   {
-    files: [TS_EXTENSIONS_GLOB],
+    files: [GLOB_TS],
     ...jsdoc.configs['flat/recommended-typescript-error'],
   },
   {
-    files: [JS_EXTENSIONS_GLOB],
+    files: [GLOB_JS],
     ...jsdoc.configs['flat/recommended-typescript-flavor-error'],
   },
   eslintPluginUnicorn.configs['flat/recommended'],
