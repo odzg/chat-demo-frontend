@@ -24,7 +24,6 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "ESNext",
-    "tsBuildInfoFile": "node_modules/.cache/typescript/tsconfig.tsbuildinfo",
     "types": ["vite/client", "prettier-plugin-tailwindcss"],
     "verbatimModuleSyntax": true
   },

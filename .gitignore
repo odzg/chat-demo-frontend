@@ -29,3 +29,4 @@ dist-ssr
 
 # auto-generated files
 /eslint-typegen.d.ts
+/*.tsbuildinfo
