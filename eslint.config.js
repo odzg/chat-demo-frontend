@@ -51,6 +51,7 @@ export default typegen([
       ...tseslint.configs.recommendedTypeChecked,
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
+      react.configs['recommended-type-checked'],
     ],
     files: [GLOB_JS, GLOB_TS],
     languageOptions: {
@@ -59,12 +60,7 @@ export default typegen([
         tsconfigRootDir: import.meta.dirname,
       },
     },
-  }),
-  {
-    files: [GLOB_JS, GLOB_TS],
-    ...react.configs['recommended-type-checked'],
-    rules: {
-      ...react.configs['recommended-type-checked'].rules,
+    rules: /** @satisfies {import('./eslint-typegen').RuleOptions} */ ({
       '@typescript-eslint/array-type': ['error', { default: 'generic' }],
       '@typescript-eslint/consistent-generic-constructors': 'error',
       '@typescript-eslint/consistent-indexed-object-style': 'error',
@@ -85,8 +81,8 @@ export default typegen([
         { argsIgnorePattern: '^_' },
       ],
       '@typescript-eslint/prefer-nullish-coalescing': 'off', // Too restrictive
-    },
-  },
+    }),
+  }),
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
   comments.recommended,
   ...eslintPluginJsonc.configs['flat/recommended-with-jsonc'],
