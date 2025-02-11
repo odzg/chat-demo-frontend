@@ -59,7 +59,7 @@
     "eslint-plugin-unicorn": "56.0.1",
     "eslint-plugin-yml": "1.16.0",
     "eslint-typegen": "1.0.0",
-    "knip": "5.43.6",
+    "knip": "5.44.0",
     "prettier": "3.5.0",
     "prettier-plugin-tailwindcss": "0.6.11",
     "syncpack": "13.0.2",
