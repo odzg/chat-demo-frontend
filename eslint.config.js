@@ -6,6 +6,7 @@ import markdown from '@eslint/markdown';
 import gitignore from 'eslint-config-flat-gitignore';
 // @ts-expect-error Currently does not include a type-declaration file
 import eslintConfigPrettier from 'eslint-config-prettier';
+import cssPlugin from 'eslint-plugin-css';
 import deMorgan from 'eslint-plugin-de-morgan';
 import eslintPluginImportX from 'eslint-plugin-import-x';
 import jsdoc from 'eslint-plugin-jsdoc';
@@ -115,6 +116,7 @@ export default typegen([
   sonarjs.configs.recommended,
   regexpPlugin.configs['flat/recommended'],
   deMorgan.configs.recommended,
+  cssPlugin.configs['flat/standard'],
   packageJson,
   {
     plugins: {
