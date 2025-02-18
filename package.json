@@ -57,7 +57,7 @@
     "eslint-plugin-security": "3.0.1",
     "eslint-plugin-sonarjs": "3.0.1",
     "eslint-plugin-unicorn": "56.0.1",
-    "eslint-plugin-yml": "1.16.0",
+    "eslint-plugin-yml": "1.17.0",
     "eslint-typegen": "1.0.0",
     "knip": "5.44.0",
     "prettier": "3.5.0",
