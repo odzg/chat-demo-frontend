@@ -8,8 +8,8 @@ import { twJoin } from 'tailwind-merge';
 import {
   useGetThreadMessagesQuery,
   useGetThreadUsersQuery,
-} from '@/api/thread-api';
-import { useGetMyUserQuery } from '@/api/user-api';
+} from '#api/thread-api/index.ts';
+import { useGetMyUserQuery } from '#api/user-api/index.ts';
 
 import type { MessageBubbleProps } from './message-bubble-types';
 

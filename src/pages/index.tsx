@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import { AppBar, Toolbar, Typography } from '@mui/material';
 
-import { ThreadsList } from '@/features/chat/components/threads-list';
+import { ThreadsList } from '#features/chat/components/threads-list/index.ts';
 
 export const IndexPage: FC = () => (
   <div className="flex w-full flex-col items-center">

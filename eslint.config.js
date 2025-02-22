@@ -162,7 +162,7 @@ export default typegen([
             'object',
             'unknown',
           ],
-          internalPattern: ['^@/'],
+          internalPattern: ['^#'],
           newlinesBetween: 'always',
         },
       ],

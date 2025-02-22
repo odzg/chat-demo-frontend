@@ -4,9 +4,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { Link, Navigate, useParams } from 'react-router';
 
-import { useGetThreadUsersQuery } from '@/api/thread-api';
-import { useGetMyUserQuery } from '@/api/user-api';
-import { Thread } from '@/features/chat/components/thread';
+import { useGetThreadUsersQuery } from '#api/thread-api/index.ts';
+import { useGetMyUserQuery } from '#api/user-api/index.ts';
+import { Thread } from '#features/chat/components/thread/index.ts';
 
 type ThreadPageUrlParams = Record<'threadId', string>;
 

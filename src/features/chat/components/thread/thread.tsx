@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import { Typography } from '@mui/material';
 
-import { useGetThreadMessagesQuery } from '@/api/thread-api';
+import { useGetThreadMessagesQuery } from '#api/thread-api/index.ts';
 
 import type { ThreadProps } from './thread-types';
 

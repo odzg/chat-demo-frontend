@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { useGetThreadsQuery } from '@/api/thread-api';
+import { useGetThreadsQuery } from '#api/thread-api/index.ts';
 
 import { ThreadsListItem } from './threads-list-item';
 

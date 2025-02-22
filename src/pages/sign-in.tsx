@@ -3,8 +3,8 @@ import type { FC } from 'react';
 import { Button } from '@mui/material';
 import { Navigate } from 'react-router';
 
-import { useLazySignInQuery } from '@/api/auth-api';
-import { useGetMyUserQuery } from '@/api/user-api';
+import { useLazySignInQuery } from '#api/auth-api/index.ts';
+import { useGetMyUserQuery } from '#api/user-api/index.ts';
 
 export const SignInPage: FC = () => {
   const { refetch, userId } = useGetMyUserQuery(undefined, {

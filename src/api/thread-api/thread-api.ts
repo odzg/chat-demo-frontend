@@ -1,6 +1,6 @@
-import { env } from '@/constants/env';
-import { CreateThreadMessageSchema } from '@/schemas/event-schemas';
-import { parseJson } from '@/utils/parse-json-string';
+import { env } from '#constants/env.ts';
+import { CreateThreadMessageSchema } from '#schemas/event-schemas.ts';
+import { parseJson } from '#utils/parse-json-string.ts';
 
 import type {
   CreateThreadMessageQueryArgument,

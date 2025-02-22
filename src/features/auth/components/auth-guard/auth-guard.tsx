@@ -3,7 +3,7 @@ import type { FC, PropsWithChildren } from 'react';
 import { CircularProgress } from '@mui/material';
 import { Navigate } from 'react-router';
 
-import { useGetMyUserQuery } from '@/api/user-api';
+import { useGetMyUserQuery } from '#api/user-api/index.ts';
 
 export const AuthGuard: FC<PropsWithChildren> = ({ children }) => {
   const { isLoading, userId } = useGetMyUserQuery(undefined, {

@@ -3,8 +3,8 @@ import { IconButton, TextField } from '@mui/material';
 import { type FC, useState } from 'react';
 import { Navigate } from 'react-router';
 
-import { useCreateThreadMessageMutation } from '@/api/thread-api';
-import { useGetMyUserQuery } from '@/api/user-api';
+import { useCreateThreadMessageMutation } from '#api/thread-api/index.ts';
+import { useGetMyUserQuery } from '#api/user-api/index.ts';
 
 import type { ThreadFooterProps } from './thread-footer-types';
 

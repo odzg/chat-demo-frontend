@@ -4,8 +4,8 @@ import type {
   Thread,
   ThreadMessage,
   ThreadUser,
-} from '@/schemas/thread-schemas';
-import type { User } from '@/schemas/user-schemas';
+} from '#schemas/thread-schemas.ts';
+import type { User } from '#schemas/user-schemas.ts';
 
 export interface CreateThreadMessageQueryArgument {
   threadId: number;

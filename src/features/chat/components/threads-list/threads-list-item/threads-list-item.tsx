@@ -5,8 +5,8 @@ import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router';
 import { capitalize } from 'remeda';
 
-import { useGetThreadsQuery } from '@/api/thread-api';
-import { useGetMyUserQuery } from '@/api/user-api';
+import { useGetThreadsQuery } from '#api/thread-api/index.ts';
+import { useGetMyUserQuery } from '#api/user-api/index.ts';
 
 import type { ThreadsListItemProps } from './threads-list-item-types';
 
