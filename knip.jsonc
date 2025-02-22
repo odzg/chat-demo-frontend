@@ -1,7 +1,10 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "entry": [
-    // ".dependency-cruiser.js" is the config file for `dependency-cruiser`
+    // Entry file of Vite's dev server
+    "src/main.tsx",
+
+    // Entry file of `dependency-cruiser`
     ".dependency-cruiser.js"
   ],
   "ignoreDependencies": [
@@ -10,8 +13,5 @@
 
     // Imported by main CSS file
     "tailwindcss"
-  ],
-  "vite": {
-    "entry": "src/main.tsx"
-  }
+  ]
 }
