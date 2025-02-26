@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "@emotion/styled": "11.14.0",
-    "@mui/icons-material": "6.4.5",
-    "@mui/material": "6.4.5",
+    "@mui/icons-material": "6.4.6",
+    "@mui/material": "6.4.6",
     "@reduxjs/toolkit": "2.6.0",
     "date-fns": "4.1.0",
     "react": "19.0.0",
