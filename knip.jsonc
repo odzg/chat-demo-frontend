@@ -4,7 +4,7 @@
     // Entry file of Vite's dev server
     "src/main.tsx",
 
-    // Entry file of `dependency-cruiser`
+    // Config file of `dependency-cruiser`
     ".dependency-cruiser.js"
   ],
   "ignoreDependencies": [
