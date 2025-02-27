@@ -144,12 +144,6 @@ export default typegen([
       'import-x/no-unresolved': ['error', { commonjs: true }],
       'jsonc/sort-keys': 'error',
       'n/no-missing-import': 'off', // This is already enforced either by TypeScript or by `import-x/no-unresolved`
-      'n/no-unpublished-import': [
-        'error',
-        {
-          ignoreTypeImport: true,
-        },
-      ],
       'no-console': ['error', { allow: ['error'] }],
       'perfectionist/sort-imports': [
         'error',
