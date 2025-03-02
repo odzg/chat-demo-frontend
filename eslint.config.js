@@ -21,7 +21,6 @@ import pluginPromise from 'eslint-plugin-promise';
 import reactPlugin from 'eslint-plugin-react';
 // @ts-expect-error Currently does not include a type-declaration file
 import reactCompiler from 'eslint-plugin-react-compiler';
-// @ts-expect-error Currently does not include a type-declaration file
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import regexpPlugin from 'eslint-plugin-regexp';
@@ -113,6 +112,7 @@ export default typegen([
     files: [GLOB_JS, GLOB_TS],
     ...react.configs['recommended-type-checked'],
   },
+  reactHooks.configs['recommended-latest'],
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat['jsx-runtime'],
   reactRefresh.configs.vite,
@@ -127,13 +127,8 @@ export default typegen([
     plugins: {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
       'react-compiler': reactCompiler,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
-      'react-hooks': reactHooks,
     },
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration for `eslint-plugin-react-hooks`
     rules: {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
-      ...reactHooks.configs.recommended.rules,
       '@eslint-community/eslint-comments/require-description': 'error',
       'import-x/default': 'off', // TypeScript already enforces this
       'import-x/named': 'off', // TypeScript already enforces this
