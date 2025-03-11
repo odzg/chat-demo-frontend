@@ -29,175 +29,177 @@ import sonarjs from 'eslint-plugin-sonarjs';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintPluginYml from 'eslint-plugin-yml';
 import typegen from 'eslint-typegen';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
 const GLOB_JS = '**/*.?([cm])js';
 const GLOB_TS = '**/*.?([cm])ts';
 
-export default typegen([
-  gitignore(),
-  {
-    ignores: [
+export default typegen(
+  defineConfig([
+    gitignore(),
+    globalIgnores([
       /* Auto-generated files/directories */
       'pnpm-lock.yaml',
 
       /* Specific dot-files/dot-directories which should not be auto-ignored */
       '!.dependency-cruiser.js',
       '!.vscode',
-    ],
-  },
-  eslint.configs.recommended,
-  ...tseslint.config({
-    extends: [
-      ...tseslint.configs.recommendedTypeChecked,
-      ...tseslint.configs.strictTypeChecked,
-      ...tseslint.configs.stylisticTypeChecked,
-    ],
-    files: [GLOB_JS, GLOB_TS],
-    languageOptions: {
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-    rules: /** @satisfies {import('./eslint-typegen').RuleOptions} */ ({
-      '@typescript-eslint/array-type': ['error', { default: 'generic' }],
-      '@typescript-eslint/consistent-generic-constructors': 'error',
-      '@typescript-eslint/consistent-indexed-object-style': 'error',
-      '@typescript-eslint/consistent-type-assertions': 'error',
-      '@typescript-eslint/consistent-type-imports': [
-        'error',
-        { fixStyle: 'inline-type-imports' },
+    ]),
+    eslint.configs.recommended,
+    {
+      extends: [
+        tseslint.configs.recommendedTypeChecked,
+        tseslint.configs.strictTypeChecked,
+        tseslint.configs.stylisticTypeChecked,
       ],
-      '@typescript-eslint/no-empty-object-type': [
-        'error',
-        {
-          allowInterfaces: 'with-single-extends',
-        },
-      ],
-      '@typescript-eslint/no-import-type-side-effects': 'error',
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        { argsIgnorePattern: '^_' },
-      ],
-      '@typescript-eslint/prefer-nullish-coalescing': 'off', // Too restrictive
-    }),
-  }),
-  {
-    files: [GLOB_TS],
-    ...jsdoc.configs['flat/recommended-typescript-error'],
-  },
-  {
-    files: [GLOB_JS],
-    ...jsdoc.configs['flat/recommended-typescript-flavor-error'],
-  },
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
-  comments.recommended,
-  ...eslintPluginJsonc.configs['flat/recommended-with-jsonc'],
-  ...eslintPluginJsonc.configs['flat/prettier'],
-  ...eslintPluginJsonSchemaValidator.configs['flat/recommended'],
-  ...markdown.configs.recommended,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
-  pluginSecurity.configs.recommended,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
-  pluginPromise.configs['flat/recommended'],
-  perfectionist.configs['recommended-natural'],
-  ...eslintPluginYml.configs['flat/recommended'],
-  ...eslintPluginYml.configs['flat/prettier'],
-  nodePlugin.configs['flat/recommended-script'],
-  eslintPluginImportX.flatConfigs.recommended,
-  eslintPluginImportX.flatConfigs.typescript,
-  {
-    files: [GLOB_JS, GLOB_TS],
-    ...react.configs['recommended-type-checked'],
-  },
-  reactHooks.configs['recommended-latest'],
-  reactPlugin.configs.flat.recommended,
-  reactPlugin.configs.flat['jsx-runtime'],
-  reactRefresh.configs.vite,
-  eslintPluginUnicorn.configs.recommended,
-  sonarjs.configs.recommended,
-  regexpPlugin.configs['flat/recommended'],
-  deMorgan.configs.recommended,
-  eslintPluginMath.configs.recommended,
-  cssPlugin.configs['flat/standard'],
-  packageJson,
-  {
-    plugins: {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
-      'react-compiler': reactCompiler,
-    },
-    rules: {
-      '@eslint-community/eslint-comments/require-description': 'error',
-      'import-x/default': 'off', // TypeScript already enforces this
-      'import-x/named': 'off', // TypeScript already enforces this
-      'import-x/namespace': 'off', // TypeScript already enforces this
-      'import-x/newline-after-import': 'error',
-      'import-x/no-duplicates': ['error', { 'prefer-inline': true }],
-      'import-x/no-named-as-default-member': 'off', // TypeScript already enforces this
-      'import-x/no-unresolved': ['error', { commonjs: true }],
-      'jsonc/sort-keys': 'error',
-      'n/no-missing-import': 'off', // This is already enforced either by TypeScript or by `import-x/no-unresolved`
-      'no-console': ['error', { allow: ['error'] }],
-      'perfectionist/sort-imports': [
-        'error',
-        {
-          groups: [
-            'type',
-            'builtin',
-            'external',
-            'internal-type',
-            'internal',
-            ['parent-type', 'sibling-type', 'index-type'],
-            ['parent', 'sibling', 'index'],
-            'object',
-            'unknown',
-          ],
-          internalPattern: ['^#'],
-          newlinesBetween: 'always',
-        },
-      ],
-      'react-compiler/react-compiler': 'error',
-      'security/detect-object-injection': 'off', // Too restrictive
-      'unicorn/no-null': 'off', // Too restrictive
-      'unicorn/prevent-abbreviations': [
-        'error',
-        {
-          allowList: {
-            EnvSchema: true,
+      files: [GLOB_JS, GLOB_TS],
+      languageOptions:
+        /** @satisfies {import('typescript-eslint').ConfigArray[number]['languageOptions']} */ ({
+          parserOptions: {
+            projectService: true,
+            tsconfigRootDir: import.meta.dirname,
           },
-          ignore: [/^env$/, /props$/i, /params$/i],
-        },
-      ],
-    },
-    settings: {
-      react: {
-        version: 'detect',
+        }),
+      rules: {
+        '@typescript-eslint/array-type': ['error', { default: 'generic' }],
+        '@typescript-eslint/consistent-generic-constructors': 'error',
+        '@typescript-eslint/consistent-indexed-object-style': 'error',
+        '@typescript-eslint/consistent-type-assertions': 'error',
+        '@typescript-eslint/consistent-type-imports': [
+          'error',
+          { fixStyle: 'inline-type-imports' },
+        ],
+        '@typescript-eslint/no-empty-object-type': [
+          'error',
+          {
+            allowInterfaces: 'with-single-extends',
+          },
+        ],
+        '@typescript-eslint/no-import-type-side-effects': 'error',
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          { argsIgnorePattern: '^_' },
+        ],
+        '@typescript-eslint/prefer-nullish-coalescing': 'off', // Too restrictive
       },
     },
-  },
-  {
-    files: ['**/*.cjs'],
-    rules: {
-      '@typescript-eslint/no-require-imports': 'off', // CommonJS files must use "require" to import modules
+    {
+      extends: [jsdoc.configs['flat/recommended-typescript-error']],
+      files: [GLOB_TS],
     },
-  },
-  {
-    files: ['package.json'],
-    rules: {
-      'jsonc/sort-keys': 'off', // Sorting of keys within `package.json` is handled by `eslint-plugin-package-json`
+    {
+      extends: [jsdoc.configs['flat/recommended-typescript-flavor-error']],
+      files: [GLOB_JS],
     },
-  },
-  {
-    files: ['src/store.ts'],
-    rules: {
-      'unicorn/prefer-spread': 'off',
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
+    comments.recommended,
+    eslintPluginJsonc.configs['flat/recommended-with-jsonc'],
+    eslintPluginJsonc.configs['flat/prettier'],
+    eslintPluginJsonSchemaValidator.configs['flat/recommended'],
+    markdown.configs.recommended,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
+    pluginSecurity.configs.recommended,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
+    pluginPromise.configs['flat/recommended'],
+    perfectionist.configs['recommended-natural'],
+    eslintPluginYml.configs['flat/recommended'],
+    eslintPluginYml.configs['flat/prettier'],
+    nodePlugin.configs['flat/recommended-script'],
+    eslintPluginImportX.flatConfigs.recommended,
+    eslintPluginImportX.flatConfigs.typescript,
+    {
+      extends: [react.configs['recommended-type-checked']],
+      files: [GLOB_JS, GLOB_TS],
     },
-  },
-  eslintConfigPrettier,
-  {
-    linterOptions: {
-      reportUnusedInlineConfigs: 'error',
+    reactHooks.configs['recommended-latest'],
+    reactPlugin.configs.flat.recommended,
+    reactPlugin.configs.flat['jsx-runtime'],
+    reactRefresh.configs.vite,
+    eslintPluginUnicorn.configs.recommended,
+    sonarjs.configs.recommended,
+    regexpPlugin.configs['flat/recommended'],
+    deMorgan.configs.recommended,
+    eslintPluginMath.configs.recommended,
+    cssPlugin.configs['flat/standard'],
+    packageJson,
+    {
+      plugins: {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
+        'react-compiler': reactCompiler,
+      },
+      rules: {
+        '@eslint-community/eslint-comments/require-description': 'error',
+        'import-x/default': 'off', // TypeScript already enforces this
+        'import-x/named': 'off', // TypeScript already enforces this
+        'import-x/namespace': 'off', // TypeScript already enforces this
+        'import-x/newline-after-import': 'error',
+        'import-x/no-duplicates': ['error', { 'prefer-inline': true }],
+        'import-x/no-named-as-default-member': 'off', // TypeScript already enforces this
+        'import-x/no-unresolved': ['error', { commonjs: true }],
+        'jsonc/sort-keys': 'error',
+        'n/no-missing-import': 'off', // This is already enforced either by TypeScript or by `import-x/no-unresolved`
+        'no-console': ['error', { allow: ['error'] }],
+        'perfectionist/sort-imports': [
+          'error',
+          {
+            groups: [
+              'type',
+              'builtin',
+              'external',
+              'internal-type',
+              'internal',
+              ['parent-type', 'sibling-type', 'index-type'],
+              ['parent', 'sibling', 'index'],
+              'object',
+              'unknown',
+            ],
+            internalPattern: ['^#'],
+            newlinesBetween: 'always',
+          },
+        ],
+        'react-compiler/react-compiler': 'error',
+        'security/detect-object-injection': 'off', // Too restrictive
+        'unicorn/no-null': 'off', // Too restrictive
+        'unicorn/prevent-abbreviations': [
+          'error',
+          {
+            allowList: {
+              EnvSchema: true,
+            },
+            ignore: [/^env$/, /props$/i, /params$/i],
+          },
+        ],
+      },
+      settings: {
+        react: {
+          version: 'detect',
+        },
+      },
     },
-  },
-]);
+    {
+      files: ['**/*.cjs'],
+      rules: {
+        '@typescript-eslint/no-require-imports': 'off', // CommonJS files must use "require" to import modules
+      },
+    },
+    {
+      files: ['package.json'],
+      rules: {
+        'jsonc/sort-keys': 'off', // Sorting of keys within `package.json` is handled by `eslint-plugin-package-json`
+      },
+    },
+    {
+      files: ['src/store.ts'],
+      rules: {
+        'unicorn/prefer-spread': 'off',
+      },
+    },
+    eslintConfigPrettier,
+    {
+      linterOptions: {
+        reportUnusedInlineConfigs: 'error',
+      },
+    },
+  ]),
+);
