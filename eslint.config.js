@@ -1,7 +1,7 @@
 // @ts-expect-error Currently does not include a type-declaration file
 import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import react from '@eslint-react/eslint-plugin';
-import eslint from '@eslint/js';
+import js from '@eslint/js';
 import markdown from '@eslint/markdown';
 import gitignore from 'eslint-config-flat-gitignore';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
@@ -46,7 +46,7 @@ export default typegen(
       '!.dependency-cruiser.js',
       '!.vscode',
     ]),
-    eslint.configs.recommended,
+    js.configs.recommended,
     {
       extends: [
         tseslint.configs.recommendedTypeChecked,
