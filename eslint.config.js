@@ -13,7 +13,7 @@ import eslintPluginJsonSchemaValidator from 'eslint-plugin-json-schema-validator
 import eslintPluginJsonc from 'eslint-plugin-jsonc';
 import eslintPluginMath from 'eslint-plugin-math';
 import nodePlugin from 'eslint-plugin-n';
-import packageJson from 'eslint-plugin-package-json/configs/recommended';
+import packageJson from 'eslint-plugin-package-json';
 import perfectionist from 'eslint-plugin-perfectionist';
 // @ts-expect-error Currently does not include a type-declaration file
 import pluginPromise from 'eslint-plugin-promise';
@@ -122,7 +122,7 @@ export default typegen(
     deMorgan.configs.recommended,
     eslintPluginMath.configs.recommended,
     cssPlugin.configs['flat/standard'],
-    packageJson,
+    packageJson.configs.recommended,
     {
       plugins: {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
