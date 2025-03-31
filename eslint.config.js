@@ -18,7 +18,6 @@ import perfectionist from 'eslint-plugin-perfectionist';
 // @ts-expect-error Currently does not include a type-declaration file
 import pluginPromise from 'eslint-plugin-promise';
 import reactPlugin from 'eslint-plugin-react';
-// @ts-expect-error Currently does not include a type-declaration file
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -115,6 +114,7 @@ export default typegen(
     reactHooks.configs['recommended-latest'],
     reactPlugin.configs.flat.recommended,
     reactPlugin.configs.flat['jsx-runtime'],
+    reactCompiler.configs.recommended,
     reactRefresh.configs.vite,
     eslintPluginUnicorn.configs.recommended,
     sonarjs.configs.recommended,
@@ -124,10 +124,6 @@ export default typegen(
     cssPlugin.configs['flat/standard'],
     packageJson.configs.recommended,
     {
-      plugins: {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
-        'react-compiler': reactCompiler,
-      },
       rules: {
         '@eslint-community/eslint-comments/require-description': 'error',
         'import-x/default': 'off', // TypeScript already enforces this
@@ -158,7 +154,6 @@ export default typegen(
             newlinesBetween: 'always',
           },
         ],
-        'react-compiler/react-compiler': 'error',
         'security/detect-object-injection': 'off', // Too restrictive
         'unicorn/no-null': 'off', // Too restrictive
         'unicorn/prevent-abbreviations': [
