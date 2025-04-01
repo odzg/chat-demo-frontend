@@ -6,9 +6,6 @@ eslint-typegen.d.ts
 dist
 dist-ssr
 
-# Executables
-cloud-sql-proxy*
-
 # IDEs
 .idea
 .DS_Store
