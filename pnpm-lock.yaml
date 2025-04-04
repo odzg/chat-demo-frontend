@@ -175,8 +175,8 @@ importers:
         specifier: 13.0.3
         version: 13.0.3(typescript@5.8.2)
       tailwindcss:
-        specifier: 4.1.1
-        version: 4.1.1
+        specifier: 4.1.2
+        version: 4.1.2
       type-fest:
         specifier: 4.39.1
         version: 4.39.1
@@ -3685,9 +3685,6 @@ packages:
 
   tailwind-merge@3.1.0:
     resolution: {integrity: sha512-aV27Oj8B7U/tAOMhJsSGdWqelfmudnGMdXIlMnk1JfsjwSjts6o8HyfN7SFH3EztzH4YH8kk6GbLTHzITJO39Q==}
-
-  tailwindcss@4.1.1:
-    resolution: {integrity: sha512-QNbdmeS979Efzim2g/bEvfuh+fTcIdp1y7gA+sb6OYSW74rt7Cr7M78AKdf6HqWT3d5AiTb7SwTT3sLQxr4/qw==}
 
   tailwindcss@4.1.2:
     resolution: {integrity: sha512-VCsK+fitIbQF7JlxXaibFhxrPq4E2hDcG8apzHUdWFMCQWD8uLdlHg4iSkZ53cgLCCcZ+FZK7vG8VjvLcnBgKw==}
@@ -7990,8 +7987,6 @@ snapshots:
       - typescript
 
   tailwind-merge@3.1.0: {}
-
-  tailwindcss@4.1.1: {}
 
   tailwindcss@4.1.2: {}
 
