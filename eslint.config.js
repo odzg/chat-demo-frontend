@@ -11,6 +11,8 @@ import eslintPluginImportX from 'eslint-plugin-import-x';
 import jsdoc from 'eslint-plugin-jsdoc';
 import eslintPluginJsonSchemaValidator from 'eslint-plugin-json-schema-validator';
 import eslintPluginJsonc from 'eslint-plugin-jsonc';
+// @ts-expect-error Currently does not include a type-declaration file
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintPluginMath from 'eslint-plugin-math';
 import nodePlugin from 'eslint-plugin-n';
 import packageJson from 'eslint-plugin-package-json';
@@ -32,7 +34,7 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
 const GLOB_JS = '**/*.?([cm])js';
-const GLOB_TS = '**/*.?([cm])ts';
+const GLOB_TS = '**/*.?([cm])ts?(x)';
 
 export default typegen(
   defineConfig([
@@ -51,6 +53,7 @@ export default typegen(
         tseslint.configs.recommendedTypeChecked,
         tseslint.configs.strictTypeChecked,
         tseslint.configs.stylisticTypeChecked,
+        react.configs['recommended-type-checked'],
       ],
       files: [GLOB_JS, GLOB_TS],
       languageOptions:
@@ -107,13 +110,11 @@ export default typegen(
     nodePlugin.configs['flat/recommended'],
     eslintPluginImportX.flatConfigs.recommended,
     eslintPluginImportX.flatConfigs.typescript,
-    {
-      extends: [react.configs['recommended-type-checked']],
-      files: [GLOB_JS, GLOB_TS],
-    },
     reactHooks.configs['recommended-latest'],
     reactPlugin.configs.flat.recommended,
     reactPlugin.configs.flat['jsx-runtime'],
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
+    jsxA11y.flatConfigs.recommended,
     reactCompiler.configs.recommended,
     reactRefresh.configs.vite,
     eslintPluginUnicorn.configs.recommended,
