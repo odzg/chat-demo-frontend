@@ -9,6 +9,7 @@
   "scripts": {
     "build": "vite build",
     "commit": "commit",
+    "commitlint": "commitlint",
     "dev": "vite",
     "format": "prettier --write --cache .",
     "format:check": "prettier --check --cache .",
