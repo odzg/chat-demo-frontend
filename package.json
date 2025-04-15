@@ -42,7 +42,7 @@
     "@types/node": "22.14.1",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
-    "@vitejs/plugin-react-swc": "3.8.1",
+    "@vitejs/plugin-react-swc": "3.9.0",
     "dependency-cruiser": "16.10.1",
     "eslint": "9.24.0",
     "eslint-config-flat-gitignore": "2.1.0",
