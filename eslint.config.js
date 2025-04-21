@@ -110,7 +110,7 @@ export default typegen(
     nodePlugin.configs['flat/recommended'],
     eslintPluginImportX.flatConfigs.recommended,
     eslintPluginImportX.flatConfigs.typescript,
-    reactHooks.configs['recommended-latest'],
+    reactHooks.configs.recommended,
     reactPlugin.configs.flat.recommended,
     reactPlugin.configs.flat['jsx-runtime'],
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
