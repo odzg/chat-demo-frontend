@@ -1,17 +1,17 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "$schema": "https://unpkg.com/knip@5/schema-jsonc.json",
   "entry": [
     // Entry file of Vite's dev server
     "src/main.tsx",
 
     // Config file of `dependency-cruiser`
-    ".dependency-cruiser.js"
+    ".dependency-cruiser.js",
   ],
   "ignoreDependencies": [
     // Used implicitly by `eslint-plugin-import-x`
     "eslint-import-resolver-typescript",
 
     // Imported by main CSS file
-    "tailwindcss"
-  ]
+    "tailwindcss",
+  ],
 }

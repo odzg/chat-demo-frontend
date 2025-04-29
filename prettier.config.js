@@ -1,13 +1,5 @@
 /** @type {import('prettier').Config} */
 export default {
-  overrides: [
-    {
-      files: '*.jsonc',
-      options: {
-        trailingComma: 'none',
-      },
-    },
-  ],
   plugins: ['prettier-plugin-tailwindcss'],
   singleQuote: true,
   tailwindAttributes: [
