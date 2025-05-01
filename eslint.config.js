@@ -20,7 +20,6 @@ import perfectionist from 'eslint-plugin-perfectionist';
 // @ts-expect-error Currently does not include a type-declaration file
 import pluginPromise from 'eslint-plugin-promise';
 import reactPlugin from 'eslint-plugin-react';
-import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import regexpPlugin from 'eslint-plugin-regexp';
@@ -108,7 +107,6 @@ export default typegen(
     reactPlugin.configs.flat['jsx-runtime'],
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
     jsxA11y.flatConfigs.recommended,
-    reactCompiler.configs.recommended,
     reactRefresh.configs.vite,
     eslintPluginUnicorn.configs.recommended,
     sonarjs.configs.recommended,
@@ -130,6 +128,7 @@ export default typegen(
         'n/no-missing-import': 'off', // This is already enforced either by TypeScript or by `import-x/no-unresolved`
         'no-console': ['error', { allow: ['error'] }],
         'perfectionist/sort-imports': ['error', { internalPattern: ['^#'] }],
+        'react-hooks/react-compiler': 'error',
         'security/detect-object-injection': 'off', // Too restrictive
         'unicorn/no-null': 'off', // Too restrictive
         'unicorn/prevent-abbreviations': [
