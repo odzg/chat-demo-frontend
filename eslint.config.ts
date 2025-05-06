@@ -30,7 +30,7 @@ import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintPluginYml from 'eslint-plugin-yml';
 import typegen from 'eslint-typegen';
 import { defineConfig, globalIgnores } from 'eslint/config';
-import tseslint from 'typescript-eslint';
+import tseslint, { type ConfigArray } from 'typescript-eslint';
 
 const GLOB_JS = '**/*.?([cm])js';
 const GLOB_TS = '**/*.?([cm])ts?(x)';
@@ -54,13 +54,12 @@ export default typegen(
         react.configs['recommended-type-checked'],
       ],
       files: [GLOB_JS, GLOB_TS],
-      languageOptions:
-        /** @satisfies {import('typescript-eslint').ConfigArray[number]['languageOptions']} */ ({
-          parserOptions: {
-            projectService: true,
-            tsconfigRootDir: import.meta.dirname,
-          },
-        }),
+      languageOptions: {
+        parserOptions: {
+          projectService: true,
+          tsconfigRootDir: import.meta.dirname,
+        },
+      } satisfies ConfigArray[number]['languageOptions'],
       rules: {
         '@typescript-eslint/array-type': ['error', { default: 'generic' }],
         '@typescript-eslint/consistent-type-imports': [
