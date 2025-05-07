@@ -1,4 +1,8 @@
-import { StyledEngineProvider, ThemeProvider } from '@mui/material';
+import {
+  GlobalStyles,
+  StyledEngineProvider,
+  ThemeProvider,
+} from '@mui/material';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -51,7 +55,8 @@ if (rootElement) {
   createRoot(rootElement).render(
     <StrictMode>
       <Provider store={store}>
-        <StyledEngineProvider injectFirst>
+        <StyledEngineProvider enableCssLayer>
+          <GlobalStyles styles="@layer theme, base, mui, components, utilities;" />
           <ThemeProvider theme={theme}>
             <RouterProvider router={router} />
           </ThemeProvider>
