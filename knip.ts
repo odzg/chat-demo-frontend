@@ -8,9 +8,6 @@ export default {
   entry: [
     // Entry file of Vite's dev server
     'src/main.tsx',
-
-    // Config file of `dependency-cruiser`
-    '.dependency-cruiser.js',
   ],
   ignoreDependencies: [
     // Used implicitly by `eslint-plugin-import-x`
