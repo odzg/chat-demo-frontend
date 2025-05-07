@@ -1,7 +1,6 @@
 import type { KnipConfig } from 'knip';
 
 export default {
-  $schema: 'https://unpkg.com/knip@5/schema-jsonc.json',
   compilers: {
     css: (text: string) => [...text.matchAll(/(?<=@)import[^;]+/g)].join('\n'),
   },
