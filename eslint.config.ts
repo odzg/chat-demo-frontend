@@ -36,7 +36,7 @@ import packageJson from './package.json' with { type: 'json' };
 
 const GLOB_JS = '**/*.?([cm])js';
 const GLOB_PACKAGE_JSON = '**/package.json';
-const GLOB_TS = '**/*.?([cm])ts';
+const GLOB_TS = '**/*.?([cm])ts?(x)';
 
 const { name: PROJECT_NAME } = packageJson;
 
