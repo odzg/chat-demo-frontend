@@ -13,6 +13,7 @@ import eslintPluginJsonc from 'eslint-plugin-jsonc';
 // @ts-expect-error Currently does not include a type-declaration file
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintPluginMath from 'eslint-plugin-math';
+import moduleInterop from 'eslint-plugin-module-interop';
 import nodePlugin from 'eslint-plugin-n';
 import packageJsonPlugin from 'eslint-plugin-package-json';
 import perfectionist from 'eslint-plugin-perfectionist';
@@ -232,6 +233,10 @@ export default typegen(
     {
       extends: [eslintPluginMath.configs.recommended],
       name: `${PROJECT_NAME}/math`,
+    },
+    {
+      extends: [moduleInterop.configs.recommended],
+      name: `${PROJECT_NAME}/module-interop`,
     },
     {
       extends: [packageJsonPlugin.configs.recommended],
