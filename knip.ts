@@ -9,7 +9,6 @@ export default {
         .toArray()
         .join('\n'),
   },
-  entry: 'src/main.tsx',
   ignoreDependencies: [
     // Used implicitly by `eslint-plugin-import-x`
     'eslint-import-resolver-typescript',
