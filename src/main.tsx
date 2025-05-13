@@ -8,9 +8,9 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 
+import './index.css';
 import { App } from './app';
 import { AuthGuard } from './features/auth/components/auth-guard';
-import './index.css';
 import { IndexPage } from './pages/index';
 import { SignInPage } from './pages/sign-in';
 import { ThreadPage } from './pages/thread';
