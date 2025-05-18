@@ -1,7 +1,11 @@
-import type { FC } from 'react';
+import { RouterProvider } from '@tanstack/react-router';
 
-import { Outlet } from 'react-router';
+import { useAuth } from '#features/auth/contexts/auth/use-auth.ts';
 
-export const App: FC = () => {
-  return <Outlet />;
-};
+import { router } from './router';
+
+export function App() {
+  const auth = useAuth();
+
+  return <RouterProvider context={{ auth }} router={router} />;
+}

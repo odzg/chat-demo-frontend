@@ -1,12 +1,18 @@
-import type { FC } from 'react';
-
 import { Button } from '@mui/material';
-import { Navigate } from 'react-router';
+import { createFileRoute, Navigate } from '@tanstack/react-router';
+import { z } from 'zod';
 
 import { useLazySignInQuery } from '#api/auth-api/index.ts';
 import { useGetMyUserQuery } from '#api/user-api/index.ts';
 
-export const SignInPage: FC = () => {
+export const Route = createFileRoute('/sign-in')({
+  component: SignIn,
+  validateSearch: z.object({
+    redirectTo: z.string().optional(),
+  }),
+});
+
+function SignIn() {
   const { refetch, userId } = useGetMyUserQuery(undefined, {
     selectFromResult: ({ data: user, ...result }) => ({
       ...result,
@@ -14,9 +20,10 @@ export const SignInPage: FC = () => {
     }),
   });
   const [signIn] = useLazySignInQuery();
+  const search = Route.useSearch();
 
   if (userId) {
-    return <Navigate to="/" />;
+    return <Navigate to={search.redirectTo ?? ''} />;
   }
 
   return (
@@ -53,4 +60,4 @@ export const SignInPage: FC = () => {
       </Button>
     </div>
   );
-};
+}

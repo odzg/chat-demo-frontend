@@ -6,59 +6,27 @@ import {
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 
-import './index.css';
-import { App } from './app';
-import { AuthGuard } from './features/auth/components/auth-guard';
-import { IndexPage } from './pages/index';
-import { SignInPage } from './pages/sign-in';
-import { ThreadPage } from './pages/thread';
+import './styles.css';
+import { App } from './app.tsx';
+import { AuthProvider } from './features/auth/contexts/auth/provider.tsx';
 import { store } from './store';
 import { theme } from './theme';
 
-const router = createBrowserRouter([
-  {
-    children: [
-      {
-        element: (
-          <AuthGuard>
-            <IndexPage />
-          </AuthGuard>
-        ),
-        index: true,
-      },
-      {
-        element: (
-          <AuthGuard>
-            <ThreadPage />
-          </AuthGuard>
-        ),
-        path: '/threads/:threadId',
-      },
-      {
-        element: <SignInPage />,
-        path: '/sign-in',
-      },
-      {
-        element: <Navigate to="/" />,
-        path: '*',
-      },
-    ],
-    element: <App />,
-  },
-]);
+const rootElement = document.querySelector('#app');
 
-const rootElement = document.querySelector('#root');
+if (rootElement && !rootElement.innerHTML) {
+  const root = createRoot(rootElement);
 
-if (rootElement) {
-  createRoot(rootElement).render(
+  root.render(
     <StrictMode>
       <Provider store={store}>
         <StyledEngineProvider enableCssLayer>
           <GlobalStyles styles="@layer theme, base, mui, components, utilities;" />
           <ThemeProvider theme={theme}>
-            <RouterProvider router={router} />
+            <AuthProvider>
+              <App />
+            </AuthProvider>
           </ThemeProvider>
         </StyledEngineProvider>
       </Provider>

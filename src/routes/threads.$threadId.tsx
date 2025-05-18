@@ -1,17 +1,30 @@
-import type { FC } from 'react';
-
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
-import { Link, Navigate, useParams } from 'react-router';
+import {
+  createFileRoute,
+  Link,
+  Navigate,
+  redirect,
+} from '@tanstack/react-router';
 
 import { useGetThreadUsersQuery } from '#api/thread-api/index.ts';
 import { useGetMyUserQuery } from '#api/user-api/index.ts';
-import { Thread } from '#features/chat/components/thread/index.ts';
+import { Thread as ThreadComponent } from '#features/chat/components/thread/index.ts';
 
-type ThreadPageUrlParams = Record<'threadId', string>;
+export const Route = createFileRoute('/threads/$threadId')({
+  beforeLoad: ({ context, location }) => {
+    if (!context.auth.isAuthenticated) {
+      throw redirect({
+        search: { redirectTo: location.pathname },
+        to: '/sign-in',
+      });
+    }
+  },
+  component: Thread,
+});
 
-export const ThreadPage: FC = () => {
-  const { threadId } = useParams<ThreadPageUrlParams>();
+function Thread() {
+  const { threadId } = Route.useParams();
 
   const numericThreadId = Number(threadId);
   const isValidThreadId = !Number.isNaN(numericThreadId);
@@ -45,9 +58,9 @@ export const ThreadPage: FC = () => {
           )}
         </Toolbar>
       </AppBar>
-      <Thread threadId={numericThreadId} />
+      <ThreadComponent threadId={numericThreadId} />
     </div>
   ) : (
     <Navigate replace to="/" />
   );
-};
+}

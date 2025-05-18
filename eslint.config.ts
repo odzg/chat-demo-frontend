@@ -3,6 +3,7 @@ import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import react from '@eslint-react/eslint-plugin';
 import js from '@eslint/js';
 import markdown from '@eslint/markdown';
+import pluginRouter from '@tanstack/eslint-plugin-router';
 import gitignore from 'eslint-config-flat-gitignore';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 import deMorgan from 'eslint-plugin-de-morgan';
@@ -46,8 +47,9 @@ export default typegen(
     globalIgnores([
       /* Auto-generated files/directories */
       'pnpm-lock.yaml',
+      '**/routeTree.gen.ts',
 
-      /* Specific dot-files/dot-directories which should not be auto-ignored */
+      /* Specific dot files/directories which should not be auto-ignored */
       '!.dependency-cruiser.js',
       '!.vscode',
     ]),
@@ -90,17 +92,32 @@ export default typegen(
           'error',
           { argsIgnorePattern: '^_' },
         ],
+        '@typescript-eslint/only-throw-error': [
+          'error',
+          {
+            allow: [
+              // Returned by `redirect` function from `@tanstack/react-router`
+              'Redirect',
+            ],
+          },
+        ],
       },
     },
     {
       extends: [jsdoc.configs['flat/recommended-typescript-error']],
       files: [GLOB_TS],
       name: `${PROJECT_NAME}/jsdoc-typescript`,
+      rules: {
+        'jsdoc/require-jsdoc': 'off', // Too restrictive
+      },
     },
     {
       extends: [jsdoc.configs['flat/recommended-typescript-flavor-error']],
       files: [GLOB_JS],
       name: `${PROJECT_NAME}/jsdoc-javascript`,
+      rules: {
+        'jsdoc/require-jsdoc': 'off', // Too restrictive
+      },
     },
     {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- No type declaration
@@ -201,6 +218,10 @@ export default typegen(
       rules: {
         'react-hooks/react-compiler': 'error',
       },
+    },
+    {
+      extends: [pluginRouter.configs['flat/recommended']],
+      name: `${PROJECT_NAME}/router`,
     },
     {
       extends: [eslintPluginUnicorn.configs.recommended],
