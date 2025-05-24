@@ -39,8 +39,8 @@ importers:
         specifier: 9.2.0
         version: 9.2.0(@types/react@19.1.5)(react@19.1.0)(redux@5.0.1)
       remeda:
-        specifier: 2.21.8
-        version: 2.21.8
+        specifier: 2.22.1
+        version: 2.22.1
       tailwind-merge:
         specifier: 3.3.0
         version: 3.3.0
@@ -3686,8 +3686,8 @@ packages:
     resolution: {integrity: sha512-cnE+y8bz4NhMjISKbgeVJtqNbtf5QpjZP+Bslo+UqkIt9QPnX9q095eiRRASJG1/tz6dlNr6Z5NsBiWYokp6EQ==}
     hasBin: true
 
-  remeda@2.21.8:
-    resolution: {integrity: sha512-l920D7Dap/ZZoH7pY3ZML+uqemZoUc+PmIDf5BrwtXPN3iP2vQK0T62ioN9ZJnD3ON8PmEi6y7YDtc2zW3i7oQ==}
+  remeda@2.22.1:
+    resolution: {integrity: sha512-7bcggqt1D7sEmkpzuGowcsAfkO5Ae03+HFt6zA+AfJ/r5+wVJMq8DEHBAitbKWsdyeUX7qqjfi/jnH9HmdU3uA==}
 
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -8252,7 +8252,7 @@ snapshots:
     dependencies:
       jsesc: 3.0.2
 
-  remeda@2.21.8:
+  remeda@2.22.1:
     dependencies:
       type-fest: 4.41.0
 
