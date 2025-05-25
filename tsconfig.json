@@ -21,7 +21,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "ESNext",
-    "types": ["vite/client", "prettier-plugin-tailwindcss"],
+    "types": ["node", "prettier-plugin-tailwindcss", "vite/client"],
     "verbatimModuleSyntax": true
   },
   "exclude": ["dist"],
