@@ -1,4 +1,4 @@
-import { env } from '#constants/env.ts';
+import { env } from '#env.ts';
 import { CreateThreadMessageSchema } from '#schemas/event-schemas.ts';
 import { parseJson } from '#utils/parse-json-string.ts';
 

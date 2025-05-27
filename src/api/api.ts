@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { env } from '#constants/env.ts';
+import { env } from '#env.ts';
 
 import { apiToken } from './api-token';
 
