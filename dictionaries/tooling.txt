@@ -1,5 +1,6 @@
 archi
 bradlc
+COMMIT_EDITMSG
 dbaeumer
 demorgan
 depcruise
