@@ -34,7 +34,7 @@
     "react-redux": "9.2.0",
     "remeda": "2.22.5",
     "tailwind-merge": "3.3.0",
-    "zod": "3.25.48"
+    "zod": "3.25.49"
   },
   "devDependencies": {
     "@commitlint/cli": "19.8.1",
