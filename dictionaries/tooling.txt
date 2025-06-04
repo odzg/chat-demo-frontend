@@ -1,17 +1,12 @@
 archi
 bradlc
-COMMIT_EDITMSG
 dbaeumer
-demorgan
 depcruise
 esbenp
 jsons
-knip
 lefthook
 njsproj
 ntvs
 remeda
 sonarjs
 syncpack
-typegen
-vite
