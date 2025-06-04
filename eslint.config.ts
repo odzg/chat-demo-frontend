@@ -234,7 +234,7 @@ export default typegen(
         'unicorn/no-null': 'off', // Too restrictive
         'unicorn/prevent-abbreviations': [
           'error',
-          { ignore: [/^env$/i, /props$/i, /params$/i] },
+          { ignore: [/env/i, /props$/i, /params$/i] },
         ],
       },
     },
