@@ -8,5 +8,6 @@ lefthook
 njsproj
 ntvs
 remeda
+rolldown
 sonarjs
 syncpack
