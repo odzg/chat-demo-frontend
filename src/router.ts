@@ -1,6 +1,5 @@
 import { createRouter } from '@tanstack/react-router';
 
-// Import the generated route tree
 import { routeTree } from './routeTree.gen.ts';
 
 declare module '@tanstack/react-router' {
@@ -10,7 +9,7 @@ declare module '@tanstack/react-router' {
 }
 
 export const router = createRouter({
-  // @ts-expect-error context is expected to be initially empty but to be populated by `<RouterProvider />` later
+  // @ts-expect-error `context` is expected to be initially empty and is populated by `<RouterProvider />` later on
   context: {},
   defaultPreload: 'intent',
   defaultPreloadStaleTime: 0,
