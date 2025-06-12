@@ -48,7 +48,7 @@
     "@tailwindcss/vite": "4.1.10",
     "@tanstack/eslint-plugin-router": "1.120.17",
     "@types/node": "22.15.31",
-    "@types/react": "19.1.7",
+    "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
     "@vitejs/plugin-react-swc": "3.10.2",
     "cspell": "9.0.2",
