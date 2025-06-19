@@ -81,7 +81,7 @@
     "knip": "5.61.2",
     "lefthook": "1.11.14",
     "prettier": "3.5.3",
-    "prettier-plugin-tailwindcss": "0.6.12",
+    "prettier-plugin-tailwindcss": "0.6.13",
     "syncpack": "13.0.4",
     "tailwindcss": "4.1.10",
     "type-fest": "4.41.0",
