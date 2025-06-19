@@ -1,3 +1,5 @@
+import type { Linter } from 'eslint';
+
 // @ts-expect-error Currently does not include a type-declaration file
 import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import react from '@eslint-react/eslint-plugin';
@@ -17,7 +19,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintPluginMath from 'eslint-plugin-math';
 import moduleInterop from 'eslint-plugin-module-interop';
 import nodePlugin from 'eslint-plugin-n';
-import packageJsonPlugin from 'eslint-plugin-package-json';
+import packageJson from 'eslint-plugin-package-json';
 import perfectionist from 'eslint-plugin-perfectionist';
 // @ts-expect-error Currently does not include a type-declaration file
 import pluginPromise from 'eslint-plugin-promise';
@@ -34,13 +36,9 @@ import typegen from 'eslint-typegen';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import tseslint, { type ConfigArray } from 'typescript-eslint';
 
-import packageJson from './package.json' with { type: 'json' };
-
 const GLOB_JS = '**/*.?([cm])js';
 const GLOB_PACKAGE_JSON = '**/package.json';
 const GLOB_TS = '**/*.?([cm])ts?(x)';
-
-const { name: PROJECT_NAME } = packageJson;
 
 export default typegen(
   defineConfig([
@@ -57,11 +55,8 @@ export default typegen(
     {
       extends: ['js/recommended'],
       files: [GLOB_JS, GLOB_TS],
-      name: `${PROJECT_NAME}/javascript`,
+      name: js.meta.name,
       plugins: { js },
-      rules: {
-        'no-console': ['error', { allow: ['error'] }],
-      },
     },
     {
       extends: [
@@ -77,105 +72,48 @@ export default typegen(
           tsconfigRootDir: import.meta.dirname,
         },
       } satisfies ConfigArray[number]['languageOptions'],
-      name: `${PROJECT_NAME}/typescript`,
-      rules: {
-        '@typescript-eslint/array-type': ['error', { default: 'generic' }],
-        '@typescript-eslint/consistent-type-imports': [
-          'error',
-          { fixStyle: 'inline-type-imports' },
-        ],
-        '@typescript-eslint/no-empty-object-type': [
-          'error',
-          { allowInterfaces: 'with-single-extends' },
-        ],
-        '@typescript-eslint/no-import-type-side-effects': 'error',
-        '@typescript-eslint/no-unused-vars': [
-          'error',
-          { argsIgnorePattern: '^_' },
-        ],
-        '@typescript-eslint/only-throw-error': [
-          'error',
-          {
-            allow: [
-              // Returned by `redirect` function from `@tanstack/react-router`
-              'Redirect',
-            ],
-          },
-        ],
-      },
+      name: tseslint.plugin.meta?.name,
     },
     {
-      extends: [jsdoc.configs['flat/recommended-typescript-error']],
+      ...jsdoc.configs['flat/recommended-typescript-error'],
       files: [GLOB_TS],
-      name: `${PROJECT_NAME}/jsdoc-typescript`,
-      rules: {
-        'jsdoc/require-jsdoc': 'off', // Too restrictive
-      },
     },
     {
-      extends: [jsdoc.configs['flat/recommended-typescript-flavor-error']],
+      ...jsdoc.configs['flat/recommended-typescript-flavor-error'],
       files: [GLOB_JS],
-      name: `${PROJECT_NAME}/jsdoc-javascript`,
-      rules: {
-        'jsdoc/require-jsdoc': 'off', // Too restrictive
-      },
     },
-    {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- No type declaration
-      extends: [comments.recommended],
-      name: `${PROJECT_NAME}/comments`,
-      rules: {
-        '@eslint-community/eslint-comments/require-description': 'error',
-      },
-    },
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
+    comments.recommended as Linter.Config,
     {
       extends: [
         // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
         eslintPluginJsonc.configs['flat/recommended-with-jsonc'],
         // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
         eslintPluginJsonc.configs['flat/prettier'],
-        {
-          ignores: [GLOB_PACKAGE_JSON],
-          name: `${PROJECT_NAME}/json/sort-keys`,
-          rules: {
-            'jsonc/sort-keys': 'error',
-          },
-        },
       ],
-      name: `${PROJECT_NAME}/json`,
+      name: eslintPluginJsonc.meta.name,
+    },
+    {
+      ignores: [GLOB_PACKAGE_JSON],
+      name: `${eslintPluginJsonc.meta.name}/sort-keys-except-package-json`,
+      rules: {
+        'jsonc/sort-keys': 'error',
+      },
     },
     {
       extends: [eslintPluginJsonSchemaValidator.configs['flat/recommended']],
-      name: `${PROJECT_NAME}/json-schema-validator`,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- For some reason `eslintPluginJsonSchemaValidator.meta` is seen as `any` by TypeScript
+      name: eslintPluginJsonSchemaValidator.meta.name,
     },
-    {
-      extends: [markdown.configs.recommended],
-      name: `${PROJECT_NAME}/markdown`,
-    },
-    {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
-      extends: [
-        nodePlugin.configs['flat/recommended'],
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
-        pluginSecurity.configs.recommended,
-      ],
-      name: `${PROJECT_NAME}/node`,
-      rules: {
-        'n/no-missing-import': 'off', // This is already enforced either by TypeScript or by `import-x/no-unresolved`
-        'security/detect-object-injection': 'off', // Too restrictive
-      },
-    },
-    {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- No type declaration
-      extends: [pluginPromise.configs['flat/recommended']],
-      name: `${PROJECT_NAME}/promise`,
-    },
+    markdown.configs.recommended,
+    nodePlugin.configs['flat/recommended'],
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
+    pluginSecurity.configs.recommended as Linter.Config,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
+    pluginPromise.configs['flat/recommended'] as Linter.Config,
     {
       extends: [perfectionist.configs['recommended-natural']],
-      name: `${PROJECT_NAME}/perfectionist`,
-      rules: {
-        'perfectionist/sort-imports': ['error', { tsconfigRootDir: '.' }],
-      },
+      name: perfectionist.meta.name,
     },
     {
       extends: [
@@ -184,53 +122,101 @@ export default typegen(
         // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
         eslintPluginYml.configs['flat/prettier'],
       ],
-      name: `${PROJECT_NAME}/yaml`,
+      name: eslintPluginYml.meta.name,
     },
+    // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
+    eslintPluginImportX.flatConfigs.recommended,
+    // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
+    eslintPluginImportX.flatConfigs.typescript,
+    reactHooks.configs.recommended,
     {
       extends: [
         // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
-        eslintPluginImportX.flatConfigs.recommended,
+        reactPlugin.configs.flat.recommended,
         // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
-        eslintPluginImportX.flatConfigs.typescript,
+        reactPlugin.configs.flat['jsx-runtime'],
       ],
-      name: `${PROJECT_NAME}/import`,
+      name: 'eslint-plugin-react',
+    },
+    // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
+    {
+      ...react.configs['recommended-type-checked'],
+      files: [GLOB_JS, GLOB_TS],
+    },
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
+    jsxA11y.flatConfigs.recommended as Linter.Config,
+    reactRefresh.configs.vite,
+    {
+      extends: [pluginRouter.configs['flat/recommended']],
+      name: pluginRouter.meta?.name ?? '',
+    },
+    eslintPluginUnicorn.configs.recommended,
+    sonarjs.configs.recommended,
+    {
+      ...regexpPlugin.configs['flat/recommended'],
+      name: 'eslint-plugin-regexp/flat/recommended',
+    },
+    {
+      ...deMorgan.configs.recommended,
+      name: `${deMorgan.meta.name}/recommended`,
+    },
+    {
+      ...eslintPluginMath.configs.recommended,
+      name: `${eslintPluginMath.meta.name}/recommended`,
+    },
+    {
+      ...moduleInterop.configs.recommended,
+      name: `${moduleInterop.meta.name}/recommended`,
+    },
+    packageJson.configs.recommended,
+    eslintConfigPrettier,
+    {
+      extends: [
+        {
+          files: [GLOB_JS, GLOB_TS],
+          name: 'js-and-ts-files-only',
+          rules: {
+            '@typescript-eslint/array-type': ['error', { default: 'generic' }],
+            '@typescript-eslint/consistent-type-imports': [
+              'error',
+              { fixStyle: 'inline-type-imports' },
+            ],
+            '@typescript-eslint/no-empty-object-type': [
+              'error',
+              { allowInterfaces: 'with-single-extends' },
+            ],
+            '@typescript-eslint/no-import-type-side-effects': 'error',
+            '@typescript-eslint/no-unused-vars': [
+              'error',
+              { argsIgnorePattern: '^_' },
+            ],
+            '@typescript-eslint/only-throw-error': [
+              'error',
+              {
+                allow: [
+                  // Returned by `redirect` function from `@tanstack/react-router`
+                  'Redirect',
+                ],
+              },
+            ],
+          },
+        },
+      ],
+      name: 'rule-overrides',
       rules: {
+        '@eslint-community/eslint-comments/require-description': 'error',
         'import-x/default': 'off', // TypeScript already enforces this
         'import-x/named': 'off', // TypeScript already enforces this
         'import-x/namespace': 'off', // TypeScript already enforces this
         'import-x/newline-after-import': 'error',
         'import-x/no-duplicates': ['error', { 'prefer-inline': true }],
         'import-x/no-named-as-default-member': 'off', // TypeScript already enforces this
-      },
-      settings: {
-        'import-x/resolver-next': createTypeScriptImportResolver(),
-      },
-    },
-    {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- No type declaration
-      extends: [
-        reactHooks.configs.recommended,
-        react.configs['recommended-type-checked'],
-        reactPlugin.configs.flat.recommended,
-        reactPlugin.configs.flat['jsx-runtime'],
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
-        jsxA11y.flatConfigs.recommended,
-        reactRefresh.configs.vite,
-      ],
-      files: [GLOB_JS, GLOB_TS],
-      name: `${PROJECT_NAME}/react`,
-      rules: {
+        'jsdoc/require-jsdoc': 'off', // Too restrictive
+        'n/no-missing-import': 'off', // This is already enforced either by TypeScript or by `import-x/no-unresolved`
+        'no-console': ['error', { allow: ['error'] }],
+        'perfectionist/sort-imports': ['error', { tsconfigRootDir: '.' }],
         'react-hooks/react-compiler': 'error',
-      },
-    },
-    {
-      extends: [pluginRouter.configs['flat/recommended']],
-      name: `${PROJECT_NAME}/router`,
-    },
-    {
-      extends: [eslintPluginUnicorn.configs.recommended],
-      name: `${PROJECT_NAME}/unicorn`,
-      rules: {
+        'security/detect-object-injection': 'off', // Too restrictive
         'unicorn/no-null': 'off', // Too restrictive
         'unicorn/prevent-abbreviations': [
           'error',
@@ -239,38 +225,16 @@ export default typegen(
       },
     },
     {
-      extends: [sonarjs.configs.recommended],
-      name: `${PROJECT_NAME}/sonarjs`,
-    },
-    {
-      extends: [regexpPlugin.configs['flat/recommended']],
-      name: `${PROJECT_NAME}/regexp`,
-    },
-    {
-      extends: [deMorgan.configs.recommended],
-      name: `${PROJECT_NAME}/demorgan`,
-    },
-    {
-      extends: [eslintPluginMath.configs.recommended],
-      name: `${PROJECT_NAME}/math`,
-    },
-    {
-      extends: [moduleInterop.configs.recommended],
-      name: `${PROJECT_NAME}/module-interop`,
-    },
-    {
-      extends: [packageJsonPlugin.configs.recommended],
-      name: `${PROJECT_NAME}/package-json`,
-    },
-    {
       linterOptions: {
         reportUnusedInlineConfigs: 'error',
       },
-      name: `${PROJECT_NAME}/linter-options`,
+      name: 'linter-options',
     },
     {
-      extends: [eslintConfigPrettier],
-      name: `${PROJECT_NAME}/prettier`,
+      name: 'settings',
+      settings: {
+        'import-x/resolver-next': createTypeScriptImportResolver(),
+      },
     },
   ]),
 );
