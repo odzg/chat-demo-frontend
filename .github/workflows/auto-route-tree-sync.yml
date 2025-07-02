@@ -19,7 +19,7 @@ on:
       - 'vite.config.*' # Vite configuration changes
 
   # Allow manual triggering from GitHub Actions UI
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 # Required permissions for the workflow
 permissions:
