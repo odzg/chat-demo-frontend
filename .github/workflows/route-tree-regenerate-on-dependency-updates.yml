@@ -1,134 +1,121 @@
-name: Regenerate Route Tree on Dependency Updates
+name: Auto Route Tree Sync
 
+# Trigger this workflow in different scenarios:
 on:
+  # For dependency updates (handled by bots like Renovate/Dependabot)
   pull_request_target:
     types: [opened, synchronize, reopened]
     paths:
-      - 'package.json'
-      - 'pnpm-lock.yaml'
+      - 'package.json' # When dependencies change
+      - 'pnpm-lock.yaml' # When lockfile updates
 
+  # For route-related changes (handled by human developers)
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'src/routes/**' # Route files in src directory
+      - 'app/routes/**' # Route files in app directory
+      - 'tsconfig.json' # TypeScript config changes
+      - 'vite.config.*' # Vite configuration changes
+
+  # Allow manual triggering from GitHub Actions UI
+  workflow_dispatch:
+
+# Required permissions for the workflow
 permissions:
-  contents: write
-  pull-requests: write
-  actions: read
+  contents: write # To commit generated files
+  pull-requests: write # To comment on pull requests
 
 jobs:
-  check-router-changes:
-    if: github.actor == 'renovate[bot]' || github.actor == 'renovate-bot'
-    runs-on: ubuntu-latest
-    outputs:
-      needs-regeneration: ${{ steps.check.outputs.needs-regeneration }}
-    steps:
-      - name: Checkout PR
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 2
+  sync-route-tree:
+    # Smart routing: Only run when appropriate
+    # - pull_request_target: for bot dependency updates (security)
+    # - pull_request: for human route changes (normal workflow)
+    # - workflow_dispatch: for manual triggers
+    if: |
+      (github.event_name == 'pull_request_target' && contains(github.actor, 'bot')) ||
+      (github.event_name == 'pull_request' && !contains(github.actor, 'bot')) ||
+      github.event_name == 'workflow_dispatch'
 
-      - name: Check if router packages changed
-        id: check
-        run: |
-          if git diff HEAD~1 HEAD --name-only | grep -E "(package\.json|pnpm-lock\.yaml)" && \
-             git diff HEAD~1 HEAD | grep -E "@tanstack"; then
-            echo "needs-regeneration=true" >> $GITHUB_OUTPUT
-            echo "TanStack packages detected in changes"
-          else
-            echo "needs-regeneration=false" >> $GITHUB_OUTPUT
-            echo "No TanStack package changes detected"
-          fi
-
-  regenerate-route-tree:
-    needs: check-router-changes
-    if: needs.check-router-changes.outputs.needs-regeneration == 'true'
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout PR
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      # Checkout the correct branch based on event type
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          # For pull_request_target: checkout the PR branch from fork
+          # For pull_request: checkout the current branch
+          ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.ref || github.head_ref }}
+          repository: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.repo.full_name || github.repository }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      # Setup pnpm package manager
       - name: Setup pnpm
-        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.0.0
 
+      # Setup Node.js with caching for faster builds
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
-          node-version-file: package.json
-          cache: 'pnpm'
+          node-version-file: package.json # Use version from package.json
+          cache: 'pnpm' # Cache pnpm dependencies
 
+      # Install all project dependencies
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile # Use exact versions from lockfile
 
+      # Generate the route tree using available commands
       - name: Generate route tree
-        run: pnpm generate-routes
-
-      - name: Check for generated changes
-        id: changes
         run: |
-          git add .
-          if git diff --staged --quiet; then
-            echo "has-changes=false" >> $GITHUB_OUTPUT
-            echo "No changes detected after route tree generation"
+          # Try common script names in order of preference
+          if jq -e '.scripts["generate-routes"]' package.json > /dev/null; then
+            echo "Using generate-routes script"
+            pnpm run generate-routes
+          elif jq -e '.scripts["tsr:generate"]' package.json > /dev/null; then
+            echo "Using tsr:generate script"
+            pnpm run tsr:generate
           else
-            echo "has-changes=true" >> $GITHUB_OUTPUT
-            echo "Changes detected after route tree generation"
-            git diff --staged --name-only
+            echo "Using TanStack Router CLI directly"
+            pnpm exec tsr generate
           fi
 
-      - name: Commit and push changes
-        if: steps.changes.outputs.has-changes == 'true'
+      # Commit any generated changes back to the branch
+      - name: Commit changes
         run: |
+          # Configure git for GitHub Actions bot
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(router): regenerate route tree after dependency update
 
-          Auto-generated by GitHub Actions after Renovate dependency update.
+          # Stage all changes (route tree files)
+          git add .
 
-          Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          git push
+          # Only commit if there are actual changes
+          if ! git diff --staged --quiet; then
+            echo "Changes detected, committing..."
+            git commit -m "chore(router): regenerate route tree"
+            git push
+            
+            # Set environment variable to trigger PR comment (only for PRs)
+            if [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
+              echo "ROUTE_TREE_UPDATED=true" >> $GITHUB_ENV
+            fi
+          else
+            echo "No changes to commit - route tree is already up to date"
+          fi
 
-      - name: Add PR comment
-        if: steps.changes.outputs.has-changes == 'true'
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
+      # Notify on the PR that route tree was updated
+      - name: Comment on PR
+        if: ${{ env.ROUTE_TREE_UPDATED == 'true' && (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') }}
+        env:
+          ROUTE_TREE_UPDATED: ${{ env.ROUTE_TREE_UPDATED }}
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           script: |
-            const { data: comments } = await github.rest.issues.listComments({
+            // Add a helpful comment to the PR
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
-            });
-
-            const botComment = comments.find(comment => 
-              comment.user.login === 'github-actions[bot]' && 
-              comment.body.includes('Route tree regenerated')
-            );
-
-            const commentBody = `🔄 **Route tree regenerated**
-
-            The route tree has been automatically regenerated due to dependency changes in this PR.
-
-            Generated files have been committed to this branch.`;
-
-            if (botComment) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: botComment.id,
-                body: commentBody
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: commentBody
-              });
-            }
-
-      - name: No changes needed
-        if: steps.changes.outputs.has-changes == 'false'
-        run: echo "✅ Route tree is already up to date"
+              body: '🔄 **Route tree regenerated** - Generated files have been committed to this branch.'
+            })
