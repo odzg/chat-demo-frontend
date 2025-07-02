@@ -97,8 +97,8 @@ importers:
         specifier: 9.1.2
         version: 9.1.2
       dependency-cruiser:
-        specifier: 16.10.3
-        version: 16.10.3
+        specifier: 16.10.4
+        version: 16.10.4
       eslint:
         specifier: 9.30.1
         version: 9.30.1(jiti@2.4.2)
@@ -1998,8 +1998,8 @@ packages:
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
 
-  acorn-loose@8.5.1:
-    resolution: {integrity: sha512-H68u/wiI8PAsSBclEIWwUg3dqEaDZXQHCovulbedgp78zJstjn7gDjfGgwUtW0BHi+KasryFLreHAGX/iXU85A==}
+  acorn-loose@8.5.2:
+    resolution: {integrity: sha512-PPvV6g8UGMGgjrMu+n/f9E/tCSkNQ2Y97eFvuVdJfG11+xdIeDcLyNdC8SHcrHbRqkfwLASdplyR6B6sKM1U4A==}
     engines: {node: '>=0.4.0'}
 
   acorn-walk@8.3.4:
@@ -2429,8 +2429,8 @@ packages:
     resolution: {integrity: sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg==}
     engines: {node: '>= 0.4'}
 
-  dependency-cruiser@16.10.3:
-    resolution: {integrity: sha512-5fUuitVV6yFe6xSbFTMF1DH8vBvjxbYVUaOa4lowQyC5SwiR3oGQwlMryMbADtfVHscgFnOj2WtF3j+xQMTkSg==}
+  dependency-cruiser@16.10.4:
+    resolution: {integrity: sha512-hrxVOjIm8idZ9ZVDGSyyG3SHiNcEUPhL6RTEmO/3wfQWLepH5pA3nuDMMrcJ1DkZztFA7xg3tk8OVO+MmwwH9w==}
     engines: {node: ^18.17||>=20}
     hasBin: true
 
@@ -2489,6 +2489,10 @@ packages:
 
   enhanced-resolve@5.18.1:
     resolution: {integrity: sha512-ZSW3ma5GkcQBIpwZTSRAI8N71Uuwgs93IezB7mf7R60tC8ZbJideoDNKjHn2O9KIlx6rkGTTEk1xUCK2E1Y2Yg==}
+    engines: {node: '>=10.13.0'}
+
+  enhanced-resolve@5.18.2:
+    resolution: {integrity: sha512-6Jw4sE1maoRJo3q8MsSIn2onJFbLTOjY9hlx4DZXmOKvLRd1Ok2kXmAGXaafL2+ijsJZ1ClYbl/pmqr9+k4iUQ==}
     engines: {node: '>=10.13.0'}
 
   enquirer@2.4.1:
@@ -6692,7 +6696,7 @@ snapshots:
     dependencies:
       acorn: 8.15.0
 
-  acorn-loose@8.5.1:
+  acorn-loose@8.5.2:
     dependencies:
       acorn: 8.15.0
 
@@ -7185,16 +7189,16 @@ snapshots:
       has-property-descriptors: 1.0.2
       object-keys: 1.1.1
 
-  dependency-cruiser@16.10.3:
+  dependency-cruiser@16.10.4:
     dependencies:
       acorn: 8.15.0
       acorn-jsx: 5.3.2(acorn@8.15.0)
       acorn-jsx-walk: 2.0.0
-      acorn-loose: 8.5.1
+      acorn-loose: 8.5.2
       acorn-walk: 8.3.4
       ajv: 8.17.1
       commander: 13.1.0
-      enhanced-resolve: 5.18.1
+      enhanced-resolve: 5.18.2
       ignore: 7.0.5
       interpret: 3.1.1
       is-installed-globally: 1.0.0
@@ -7257,6 +7261,11 @@ snapshots:
   emoji-regex@9.2.2: {}
 
   enhanced-resolve@5.18.1:
+    dependencies:
+      graceful-fs: 4.2.11
+      tapable: 2.2.2
+
+  enhanced-resolve@5.18.2:
     dependencies:
       graceful-fs: 4.2.11
       tapable: 2.2.2
@@ -9716,7 +9725,7 @@ snapshots:
   tsconfig-paths-webpack-plugin@4.2.0:
     dependencies:
       chalk: 4.1.2
-      enhanced-resolve: 5.18.1
+      enhanced-resolve: 5.18.2
       tapable: 2.2.2
       tsconfig-paths: 4.2.0
 
