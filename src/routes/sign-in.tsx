@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { createFileRoute, Navigate } from '@tanstack/react-router';
-import { z } from 'zod/v4';
+import { z } from 'zod';
 
 import { useLazySignInQuery } from '#api/auth-api/index.ts';
 import { useGetMyUserQuery } from '#api/user-api/index.ts';
