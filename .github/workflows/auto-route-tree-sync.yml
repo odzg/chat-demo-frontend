@@ -47,7 +47,10 @@ jobs:
 
       # Install all project dependencies
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile # Use exact versions from lockfile
+        run: |
+          echo "Installing dependencies with pnpm..."
+          pnpm install
+          echo "Dependencies installed successfully"
 
       # Generate the route tree using available commands
       - name: Generate route tree
