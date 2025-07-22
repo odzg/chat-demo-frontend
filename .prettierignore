@@ -1,3 +1,3 @@
-# Auto-generated files/directories that are not included in .gitignore
+# Auto-generated but not included in .gitignore
 pnpm-lock.yaml
 **/routeTree.gen.ts
