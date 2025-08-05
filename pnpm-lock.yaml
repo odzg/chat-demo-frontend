@@ -97,8 +97,8 @@ importers:
         specifier: 9.2.0
         version: 9.2.0
       dependency-cruiser:
-        specifier: 17.0.0
-        version: 17.0.0
+        specifier: 17.0.1
+        version: 17.0.1
       eslint:
         specifier: 9.32.0
         version: 9.32.0(jiti@2.4.2)
@@ -2273,8 +2273,8 @@ packages:
     resolution: {integrity: sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg==}
     engines: {node: '>= 0.4'}
 
-  dependency-cruiser@17.0.0:
-    resolution: {integrity: sha512-GlGBPwAoY3dUERyH2yNjEmZt3qDBj+R3ukcN7RJrgIsPrb5xfmjRs/XfzyMwvWMtG+3DPzlHPuaRuJUk0FA+bA==}
+  dependency-cruiser@17.0.1:
+    resolution: {integrity: sha512-4clZ8EPsOVoxGA8NMjaE95aJEO118Cd9D7gT5rysx5azij9cPiCSrnjYlZtV+90PFazlD2lZvjzBHkD1ZqGqlw==}
     engines: {node: ^20.12||^22||>=24}
     hasBin: true
 
@@ -4324,9 +4324,6 @@ packages:
   tar@7.4.3:
     resolution: {integrity: sha512-5S7Va8hKfV7W5U6g3aYxXmlPoZVAwUMy9AOKyF2fVuZa2UD3qZjg578OrLRt8PcNN1PleVaL/5/yYATNL0ICUw==}
     engines: {node: '>=18'}
-
-  teamcity-service-messages@0.1.14:
-    resolution: {integrity: sha512-29aQwaHqm8RMX74u2o/h1KbMLP89FjNiMxD9wbF2BbWOnbM+q+d1sCEC+MqCc4QW3NJykn77OMpTFw/xTHIc0w==}
 
   text-extensions@2.4.0:
     resolution: {integrity: sha512-te/NtwBwfiNRLf9Ijqx3T0nlqZiQ2XrrtBvu+cLL8ZRrGkO0NHTug8MYFKyoSrv/sHTaSKfilUkizV6XhxMJ3g==}
@@ -6807,7 +6804,7 @@ snapshots:
       has-property-descriptors: 1.0.2
       object-keys: 1.1.1
 
-  dependency-cruiser@17.0.0:
+  dependency-cruiser@17.0.1:
     dependencies:
       acorn: 8.15.0
       acorn-jsx: 5.3.2(acorn@8.15.0)
@@ -6827,7 +6824,6 @@ snapshots:
       rechoir: 0.8.0
       safe-regex: 2.1.1
       semver: 7.7.2
-      teamcity-service-messages: 0.1.14
       tsconfig-paths-webpack-plugin: 4.2.0
       watskeburt: 4.2.3
 
@@ -7591,10 +7587,6 @@ snapshots:
   fd-package-json@2.0.0:
     dependencies:
       walk-up-path: 4.0.0
-
-  fdir@6.4.6(picomatch@4.0.2):
-    optionalDependencies:
-      picomatch: 4.0.2
 
   fdir@6.4.6(picomatch@4.0.3):
     optionalDependencies:
@@ -9298,8 +9290,6 @@ snapshots:
       mkdirp: 3.0.1
       yallist: 5.0.0
 
-  teamcity-service-messages@0.1.14: {}
-
   text-extensions@2.4.0: {}
 
   through@2.3.8: {}
@@ -9314,8 +9304,8 @@ snapshots:
 
   tinyglobby@0.2.14:
     dependencies:
-      fdir: 6.4.6(picomatch@4.0.2)
-      picomatch: 4.0.2
+      fdir: 6.4.6(picomatch@4.0.3)
+      picomatch: 4.0.3
 
   tmp@0.0.33:
     dependencies:
