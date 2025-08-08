@@ -27,6 +27,8 @@
     "javascriptreact",
     "json",
     "jsonc",
+    "typescript",
+    "typescriptreact",
     "yaml"
   ],
   "files.encoding": "utf8",
