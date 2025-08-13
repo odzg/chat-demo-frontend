@@ -50,7 +50,7 @@
     "@tanstack/eslint-plugin-router": "1.131.2",
     "@tanstack/router-cli": "1.131.5",
     "@types/node": "22.17.1",
-    "@types/react": "19.1.9",
+    "@types/react": "19.1.10",
     "@types/react-dom": "19.1.7",
     "@vitejs/plugin-react-swc": "4.0.0",
     "cspell": "9.2.0",
