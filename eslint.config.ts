@@ -26,8 +26,6 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import regexpPlugin from 'eslint-plugin-regexp';
-// @ts-expect-error Currently does not include type declarations
-import pluginSecurity from 'eslint-plugin-security';
 import sonarjs from 'eslint-plugin-sonarjs';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintPluginYml from 'eslint-plugin-yml';
@@ -103,8 +101,6 @@ export default typegen(
     },
     markdown.configs.recommended,
     nodePlugin.configs['flat/recommended'],
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
-    pluginSecurity.configs.recommended as Linter.Config,
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- No type declaration
     pluginPromise.configs['flat/recommended'] as Linter.Config,
     {
@@ -195,7 +191,6 @@ export default typegen(
         'no-console': ['error', { allow: ['error'] }],
         'perfectionist/sort-imports': ['error', { tsconfigRootDir: '.' }],
         'react-hooks/react-compiler': 'error',
-        'security/detect-object-injection': 'off', // Too restrictive
         'unicorn/no-null': 'off', // Too restrictive
         'unicorn/prevent-abbreviations': [
           'error',
