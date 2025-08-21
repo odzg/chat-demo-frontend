@@ -9,8 +9,8 @@ export default {
         .toArray()
         .join('\n'),
   },
-  ignore:
-    // Auto-generated but not included in .gitignore
-    '**/routeTree.gen.ts',
+  ignore: [
+    '**/routeTree.gen.ts', // Auto-generated but not included in .gitignore]
+  ],
   treatConfigHintsAsErrors: true,
 } satisfies KnipConfig;
