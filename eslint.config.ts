@@ -135,7 +135,6 @@ export default typegen(
       // Temporary name until the plugin is updated to include names in its exported configs
       name: 'eslint-plugin-react',
     },
-    // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
     {
       ...react.configs['recommended-type-checked'],
       files: [GLOB_JS, GLOB_TS],
