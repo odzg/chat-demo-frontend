@@ -38,7 +38,7 @@ const GLOB_PACKAGE_JSON = '**/package.json';
 const GLOB_TS = '**/*.?([cm])ts?(x)';
 
 export default typegen(
-  defineConfig([
+  defineConfig(
     gitignore(),
     globalIgnores(
       ['pnpm-lock.yaml', '**/routeTree.gen.ts'],
@@ -109,8 +109,6 @@ export default typegen(
       ...perfectionist.configs['recommended-natural'],
     },
     {
-      // @ts-expect-error The built-in types for `eslint-plugin-yml` configs are currently incompatible
-      // with the official ESLint `Linter.Config` type.
       extends: [
         ...eslintPluginYml.configs['flat/recommended'],
         ...eslintPluginYml.configs['flat/prettier'],
@@ -119,16 +117,12 @@ export default typegen(
       // Temporary name until the plugin is updated to include names in its exported configs
       name: eslintPluginYml.meta.name,
     },
-    // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
     eslintPluginImportX.flatConfigs.recommended,
-    // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
     eslintPluginImportX.flatConfigs.typescript,
     reactHooks.configs.recommended,
     {
       extends: [
-        // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
         reactPlugin.configs.flat.recommended,
-        // @ts-expect-error Config type is currently incompatible with official eslint `Linter.Config` type
         reactPlugin.configs.flat['jsx-runtime'],
       ],
 
@@ -226,5 +220,5 @@ export default typegen(
         ],
       },
     },
-  ]),
+  ),
 );
