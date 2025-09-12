@@ -27,7 +27,7 @@
     "@mui/material": "7.3.2",
     "@reduxjs/toolkit": "2.9.0",
     "@tanstack/react-router": "1.131.41",
-    "@tanstack/react-router-devtools": "1.131.41",
+    "@tanstack/react-router-devtools": "1.131.42",
     "@tanstack/router-plugin": "1.131.41",
     "date-fns": "4.1.0",
     "react": "19.1.1",
