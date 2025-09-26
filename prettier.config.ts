@@ -1,4 +1,5 @@
-/** @type {import('prettier').Config} */
+import type { Config } from 'prettier';
+
 export default {
   plugins: ['prettier-plugin-tailwindcss'],
   singleQuote: true,
@@ -10,4 +11,4 @@ export default {
     'classes',
   ],
   tailwindFunctions: ['tw', 'twObject', 'twMerge', 'twJoin', 'twConsumeCssVar'],
-};
+} satisfies Config;
