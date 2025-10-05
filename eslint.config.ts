@@ -119,7 +119,14 @@ export default typegen(
     },
     eslintPluginImportX.flatConfigs.recommended,
     eslintPluginImportX.flatConfigs.typescript,
-    reactHooks.configs.recommended,
+    {
+      extends: ['react-hooks/recommended'],
+      files: [GLOB_JS, GLOB_TS],
+      name: 'eslint-plugin-react-hooks',
+      plugins: {
+        'react-hooks': reactHooks,
+      },
+    },
     {
       extends: [
         reactPlugin.configs.flat.recommended,
@@ -183,7 +190,6 @@ export default typegen(
         'n/no-missing-import': 'off', // This is already enforced either by TypeScript or by `import-x/no-unresolved`
         'no-console': ['error', { allow: ['error'] }],
         'perfectionist/sort-imports': ['error', { tsconfigRootDir: '.' }],
-        'react-hooks/react-compiler': 'error',
         'unicorn/no-null': 'off', // Too restrictive
         'unicorn/prevent-abbreviations': [
           'error',
