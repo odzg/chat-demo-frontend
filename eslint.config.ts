@@ -120,12 +120,9 @@ export default typegen(
     eslintPluginImportX.flatConfigs.recommended,
     eslintPluginImportX.flatConfigs.typescript,
     {
-      extends: ['react-hooks/recommended'],
-      files: [GLOB_JS, GLOB_TS],
-      name: 'eslint-plugin-react-hooks',
-      plugins: {
-        'react-hooks': reactHooks,
-      },
+      // Temporary name until the plugin is updated to include names in its exported configs
+      name: `${reactHooks.meta.name}/recommended`,
+      ...reactHooks.configs.flat.recommended,
     },
     {
       extends: [
