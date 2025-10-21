@@ -49,7 +49,7 @@
     "@tailwindcss/vite": "4.1.15",
     "@tanstack/eslint-plugin-router": "1.133.19",
     "@tanstack/router-cli": "1.133.20",
-    "@types/node": "22.18.11",
+    "@types/node": "22.18.12",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "@vitejs/plugin-react-swc": "4.1.0",
@@ -92,6 +92,6 @@
   },
   "packageManager": "pnpm@10.18.3+sha512.bbd16e6d7286fd7e01f6b3c0b3c932cda2965c06a908328f74663f10a9aea51f1129eea615134bf992831b009eabe167ecb7008b597f40ff9bc75946aadfb08d",
   "engines": {
-    "node": "22.20.0"
+    "node": "22.21.0"
   }
 }
