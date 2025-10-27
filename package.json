@@ -43,7 +43,7 @@
     "@commitlint/prompt-cli": "20.1.0",
     "@commitlint/types": "20.0.0",
     "@eslint-community/eslint-plugin-eslint-comments": "4.5.0",
-    "@eslint-react/eslint-plugin": "2.2.3",
+    "@eslint-react/eslint-plugin": "2.2.4",
     "@eslint/js": "9.38.0",
     "@eslint/markdown": "7.5.0",
     "@tailwindcss/vite": "4.1.16",
