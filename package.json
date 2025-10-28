@@ -80,7 +80,7 @@
     "eslint-plugin-yml": "1.19.0",
     "eslint-typegen": "2.3.0",
     "knip": "5.66.3",
-    "lefthook": "2.0.0",
+    "lefthook": "2.0.1",
     "prettier": "3.6.2",
     "prettier-plugin-tailwindcss": "0.7.1",
     "syncpack": "13.0.4",
