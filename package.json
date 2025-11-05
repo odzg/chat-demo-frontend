@@ -27,7 +27,7 @@
     "@emotion/styled": "11.14.1",
     "@mui/icons-material": "7.3.5",
     "@mui/material": "7.3.5",
-    "@reduxjs/toolkit": "2.10.0",
+    "@reduxjs/toolkit": "2.10.1",
     "@tanstack/react-router": "1.134.12",
     "@tanstack/react-router-devtools": "1.134.12",
     "@tanstack/router-plugin": "1.134.12",
