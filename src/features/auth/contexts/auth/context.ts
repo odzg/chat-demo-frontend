@@ -12,12 +12,11 @@ export interface AuthContextType {
   userId: undefined | User['id'];
 }
 
-interface SignIn
-  extends TypedLazyQueryTrigger<
-    SignInEndpointTypes['ResultType'],
-    SignInEndpointTypes['QueryArg'],
-    SignInEndpointTypes['BaseQuery']
-  > {}
+interface SignIn extends TypedLazyQueryTrigger<
+  SignInEndpointTypes['ResultType'],
+  SignInEndpointTypes['QueryArg'],
+  SignInEndpointTypes['BaseQuery']
+> {}
 
 type SignInEndpointTypes = typeof authApi.endpoints.signIn.Types;
 
