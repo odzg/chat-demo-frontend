@@ -83,7 +83,7 @@
     "eslint-typegen": "2.3.0",
     "knip": "5.71.0",
     "lefthook": "2.0.8",
-    "prettier": "3.7.3",
+    "prettier": "3.7.4",
     "prettier-plugin-tailwindcss": "0.7.2",
     "syncpack": "13.0.4",
     "tailwindcss": "4.1.17",
