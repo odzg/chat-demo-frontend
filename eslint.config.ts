@@ -246,7 +246,14 @@ export default typegen(
         'jsdoc/require-jsdoc': 'off', // Too restrictive
         'n/no-missing-import': 'off', // This is already enforced either by TypeScript or by `import-x/no-unresolved`
         'no-console': ['error', { allow: ['error'] }],
-        'perfectionist/sort-imports': ['error', { tsconfigRootDir: '.' }],
+        'perfectionist/sort-imports': [
+          'error',
+          {
+            tsconfig: {
+              rootDir: '.',
+            },
+          },
+        ],
         'unicorn/no-null': 'off', // Too restrictive
         'unicorn/prevent-abbreviations': [
           'error',
